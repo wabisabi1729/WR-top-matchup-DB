@@ -2387,7 +2387,15 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
             【対面相性】 ${isUnfavorable ? `<span style="color:#f87171;">⚠️ ${enemyName} は苦手な対面です</span>` : `<span style="color:#86efac;">有利候補・通常対面。攻める余地あり</span>`}
           </div>
           <div class="tips-content" style="margin-top: 8px;">
-            ${customTips}
+            ${(() => {
+              const cleanTips = String(customTips || '')
+                .replace(/【ルーン】[^\n<]*(?:<br>)?/g, '')
+                .replace(/【スペル】[^\n<]*(?:<br>)?/g, '')
+                .replace(/\n{2,}/g, '\n')
+                .replace(/<br>\s*<br>/g, '<br>');
+              const md = getStrictMatchupResearchDetail(myName, enemyName, getMatchupDisposition(myName, enemyName, isUnfavorable), cleanTips);
+              return `${cleanTips}<br><br><strong>【推奨ルーン】</strong><br>${md.rune}<br><br><strong>【推奨スペル】</strong><br>${md.spell}`;
+            })()}
           </div>
         </div>
 
