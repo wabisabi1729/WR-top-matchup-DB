@@ -460,10 +460,10 @@
     }
     if(my){
       my.addEventListener('input', function(){ onComboInput('myChampSelect','myChampSuggestions'); });
-      my.addEventListener('focus', function(){ showSuggestions('myChampSelect','myChampSuggestions', getSuggestions(my.value)); });
+      my.addEventListener('focus', function(){ showSuggestions('myChampSelect','myChampSuggestions', getMyChampionSuggestions(my.value)); });
       my.addEventListener('keydown', function(e){
         if(e.key === 'Enter'){
-          const c = findChampion(my.value);
+          const c = findMyChampion(my.value);
           if(c) my.value = c.name;
           renderModeB();
         }
