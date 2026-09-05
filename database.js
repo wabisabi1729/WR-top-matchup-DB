@@ -1636,6 +1636,30 @@ const renektonTips = {
         // 対面固有TP根拠が確認できないため、Igniteへ戻す。
         return '【サモナースペル】フラッシュ＋イグナイトを基本。Qの交換からキルラインを作り、オールインの確定力と回復阻害を優先する。テレポートは明確なマクロ上の理由がある場合だけ選択。';
       }
+      if (champName === 'グウェン') {
+        // グウェンはWR現行Diamond+でFlash + Igniteが明確な標準。
+        // PCの高レート資料はTP/Ghost/Exhaustなど選択肢が広いが、WRではFlashを固定し、
+        // 対面固有の根拠がある場合だけ2枠目を変更する。
+        if (enemyName === 'リヴェン') {
+          return '【サモナースペル】フラッシュ＋イグゾースト。MOBAFireのChallenger Gwen資料ではRiven専用にExhaustを採用し、Rivenのコンボ/Rを軽減して長い戦闘を成立させる。WRではFlashを維持してExhaustを合わせる。';
+        }
+        if (['フィオラ','エイトロックス','ザック'].includes(enemyName)) {
+          return '【サモナースペル】フラッシュ＋イグナイト。MOBAFireのChallenger Gwen資料では回復力の高いFiora/Aatrox/ZacにIgniteを推奨し、オールインのキルラインと回復阻害を重視。WR側でもFlash + Igniteが標準。';
+        }
+        if (['ダリウス','イレリア'].includes(enemyName)) {
+          return '【サモナースペル】フラッシュ＋イグナイト。MOBAFireではDariusはIgniteが必須、Ireliaも序盤の主導権確保のためIgniteを採用する考え方が明記されている。WRの標準構成とも一致。';
+        }
+        if (['ナー','ケネン','ジェイス','ヴェイン','クイン','ティーモ'].includes(enemyName)) {
+          return '【サモナースペル】フラッシュ＋ゴーストを候補。レンジ対面ではキル確定用Igniteより、接近・追撃・離脱のための移動性能の価値が上がる。MOBAFireでもGwenのGhostはkite対策として評価されている。ただしWRの現行標準はFlash + Igniteなので、Ghostは対面適応候補。';
+        }
+        if (['オーン','サイオン','マルファイト','チョーガス','ドクター・ムンド'].includes(enemyName)) {
+          return '【サモナースペル】フラッシュ＋イグナイトを基本。タンク対面ではIgniteによる早期キル圧を優先し、TPへ変更するほどの対面固有根拠は現時点では不足。';
+        }
+        if (enemyName === 'アーゴット') {
+          return '【サモナースペル】フラッシュ＋イグナイトを基本。MOBAFireでは序盤のEを避けて短いQ交換を行い、後半は1v1より5v5を重視するが、Ignite以外を必須とする根拠は確認できない。';
+        }
+        return '【サモナースペル】フラッシュ＋イグナイトを基本。現行WR Diamond+ではFlash + Igniteが70.71%で明確な標準。PC高レートではTP/Ghost等の選択肢もあるが、対面固有の強い根拠がない限りWR標準を優先する。';
+      }
       if (champName === 'オーン') {
         if ([...rangedEnemies].includes(enemyName)) return '【サモナースペル】フラッシュ＋テレポートを基本。遠距離対面ではレーン復帰と集団戦合流を優先し、キル用スペルより安全性を重視する。';
         if (["ガングプランク","シンジド","ケイル","シェン"].includes(enemyName)) return '【サモナースペル】フラッシュ＋テレポートを基本。ウェーブ処理後にテレポートでマップの数的差を作る。';
