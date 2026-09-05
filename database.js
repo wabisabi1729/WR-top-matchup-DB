@@ -802,7 +802,8 @@ const renektonTips = {
     };
 
     const gwenFirstCore = {
-      // PC版現行資料を第一基準。26.17のMOBAFire Top統計ではDusk & Dawn系が主要コア。
+      // PC版現行資料を第一基準。26.17のMOBAFire/Onetricksを優先。
+      // ルーンはPC版で征服者が圧倒的主流で、Fleet固定ではないためWR側の一般則に引っ張らない。
       // 高評価ガイドでもDusk & DawnはGwenのP/E/Nashor'sとのOn-hit相性を評価。
       // Nashor'sは「殴り合いで確実に勝てる／ステータス勝ちできる」場合の攻撃的な例外として扱い、
       // 不利対面だからNashor'sを初手にする、という根拠にはしない。
@@ -1829,7 +1830,7 @@ const renektonTips = {
       // モルデカイザー：キーストーンは対面を問わず征服者で固定。
       // レンジ対面でもR（死の領域）で1vs1を強制できるため、序盤に殴れないことを理由に
       // フリートフットワークへ逃がさず、ファイターとしての継続戦闘性能を優先する。
-      let keystone = (champName === 'モルデカイザー' || champName === 'エイトロックス')
+      let keystone = (champName === 'モルデカイザー' || champName === 'エイトロックス' || champName === 'グウェン')
         ? '征服者'
         : (champName === 'レネクトン' && renektonAudit[enemyName])
           ? renektonAudit[enemyName].keystone
@@ -1892,6 +1893,8 @@ const renektonTips = {
             ? 'ブルータル'
             : (renektonAudit[enemyName]?.keystone === 'エンパワーメント' ? 'エンパワーメント' : 'ブルータル');
         } else if (champName === 'グウェン') {
+          // PC版現行Top統計では征服者が圧倒的多数。Fleet固定にはしない。
+          // WRではブルータルを第1枠に置く既存のフルページ構成を維持し、キーストーンだけPC基準の征服者へ修正。
           p1 = 'ブルータル';
         } else if (champName === 'ナー') {
           p1 = 'ブルータル';
