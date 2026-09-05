@@ -166,7 +166,7 @@ const renektonTips = {
     };
 
     const gwenTips = {
-      "アーゴット": "【相性】やや不利。Lv1〜3はQ中心で無理に長引かせない。\n【スキル】Lv1 Q → Lv2 E → Lv3 W。基本はQ＞E＞W。\n【アイテム】黄昏と暁を基本に、終盤はゾーニャ候補。\n【ルーン】征服者。\n【スペル】フラッシュ＋テレポート。\n【対策】EはアーゴットEに合わせて温存。Rの処刑圏に入る前にWで距離を作る。",
+      "アーゴット": "【相性】やや不利。Lv1〜3はQ中心で無理に長引かせない。\n【スキル】Lv1 Q → Lv2 E → Lv3 W。基本はQ＞E＞W。\n【アイテム】ナッシャー トゥースを基本に、終盤はゾーニャ候補。\n【ルーン】征服者。\n【スペル】フラッシュ＋テレポート。\n【対策】EはアーゴットEに合わせて温存。Rの処刑圏に入る前にWで距離を作る。",
       "アカリ": "【相性】不利。Lv1〜2の接近戦は積極的、6以降は煙幕とEを警戒。\n【スキル】Lv1 Q → Lv2 E → Lv3 W。アカリのEを避けたい場合はLv3 Wを優先候補。\n【アイテム】黄昏と暁→リフトメーカー。魔法ダメージが重ければマーキュリートレッド。\n【ルーン】征服者。\n【スペル】フラッシュ＋イグナイト候補。\n【対策】WをアカリのE・Rのバーストに合わせ、煙幕内へ無理に追わない。",
       "アンベッサ": "【相性】五分〜やや不利。Lv1〜5に主導権を取り、6以降は機動力を警戒。\n【スキル】Q→E→W。Lv3 Wはアンベッサの接近を受ける場合の候補。\n【アイテム】黄昏と暁→リフトメーカー。\n【ルーン】征服者。\n【スペル】フラッシュ＋イグナイト。\n【対策】Qの中心を当て続け、アンベッサのダッシュ中にWで安全圏を作る。",
       "イラオイ": "【相性】五分〜やや有利。6前後のRだけ注意。\n【スキル】Q→E→W。Lv3 Wで触手・Eの位置関係を整理しやすい。\n【アイテム】黄昏と暁→リフトメーカー。回復が重い場合モレロノミコン候補。\n【ルーン】征服者。\n【スペル】フラッシュ＋イグナイト。\n【対策】ミニオン越しにEを避け、触手が少ない場所で戦う。イラオイR中の正面殴り合いを避ける。",
@@ -670,7 +670,7 @@ const renektonTips = {
       },
       "グウェン": {
         rune: "征服者 / 打ちこわし / 息継ぎ / 超成長 / バトルジール。",
-        timeline: "【Lv1〜5】Qのスタックを作ってEと通常攻撃を織り交ぜ、短い交換を重ねる。遠距離対面ではWを防御用に温存。<br>【Lv5〜1コア】R取得後はQ・E・通常攻撃の継続火力が大きく伸びる。相手の主要CCをW/Eで外してから入る。<br>【1〜3コア】黄昏と暁を基本軸に、リフトメーカー・ナッシャー トゥースを対面と戦闘時間で分岐。<br>【終盤】高APによるスケールを活かし、Wで遠距離スキルを遮りながらRを複数回当てる。"
+        timeline: "【Lv1〜5】Qのスタックを作ってEと通常攻撃を織り交ぜ、短い交換を重ねる。遠距離対面ではWを防御用に温存。<br>【Lv5〜1コア】R取得後はQ・E・通常攻撃の継続火力が大きく伸びる。相手の主要CCをW/Eで外してから入る。<br>【1〜3コア】黄昏と暁 / ナッシャー トゥース / リフトメーカーを対面と戦闘時間で分岐。<br>【終盤】高APによるスケールを活かし、Wで遠距離スキルを遮りながらRを複数回当てる。"
       }
       ,"ナー": {
         rune: "MOBAFire複数ガイドを基準にフリートフットワークを基本、長い殴り合いを選ぶ対面は征服者。メインは栄華3枠または不滅3枠。栄華1はブルータル、栄華2は背水の陣、栄華3は通常レジェンド：迅速、CC濃厚ならレジェンド：強靭。",
@@ -801,19 +801,14 @@ const renektonTips = {
       }
     };
 
-    /*
-     * グウェンのアイテム再監査：PC版優先
-     * 1) 現行PC MOBAFire Top統計：Dusk & Dawn → Shadowflame → Rabadon が主要コア。
-     * 2) Master+ / 高評価ガイド：Dusk & Dawn を標準完成ビルドに採用。Nashor's Tooth は強力だが、
-     *    Dusk & Dawn後の攻撃速度・DPS強化、または明確にAAを通し続けられる場合の条件付き初手。
-     * 3) Onetricks.gg Masters+：OTPの実使用傾向を補助確認。
-     * 4) WR資料：アイテム仕様・存在確認のみ。PCとWRの差が明確な場合だけ補正。
-     * よってDBの標準初手はDusk & Dawn。Nashor's Toothを標準初手にはしない。
-     */
     const gwenFirstCore = {
-      "default": { item: "黄昏と暁 → リフトメーカー", reason: "PC版の現行MOBAFire Top統計と高評価Master+ガイドを主資料とした標準コア。Dusk & DawnはGwenのスキル→通常攻撃の繋ぎ、Passive/Eのオンヒット、耐久・ヘイストをまとめて強化でき、現行PCではNashor's Toothより先に置く構成が主流。Nashor's Toothは攻撃速度をさらに伸ばしたい場合の2〜3コア以降の有力候補とする。" },
-      "ジャックス": { item: "プレートスチールキャップ → 黄昏と暁", reason: "Jax E中の通常攻撃無効を考慮しても、Dusk & Dawnはスキル後AAと追加オンヒット、HP・ヘイストをまとめて確保できる。まずSteelcapsでレーンを安定させ、E終了後の短い交換を強化する。Nashor's ToothはDusk & Dawn後の攻撃速度強化として回す。" },
-      "トリンダメア": { item: "プレートスチールキャップ → 黄昏と暁", reason: "AA主体の対面でも、現行PCの標準コアはDusk & Dawnを先に置く。SteelcapsでAA耐性を確保し、Dusk & DawnのHP・ヘイスト・スキル後AA強化で短い接触を安定させる。Nashor's Toothはその後のDPS強化候補。" },
+      // PC版現行資料を第一基準。26.17のMOBAFire Top統計ではDusk & Dawn系が主要コア。
+      // 高評価ガイドでもDusk & DawnはGwenのP/E/Nashor'sとのOn-hit相性を評価。
+      // Nashor'sは「殴り合いで確実に勝てる／ステータス勝ちできる」場合の攻撃的な例外として扱い、
+      // 不利対面だからNashor'sを初手にする、という根拠にはしない。
+      "default": { item: "黄昏と暁 → リフトメーカー", reason: "PC版現行MOBAFireを第一基準。現行Top統計の主要コアに黄昏と暁が入り、高評価ガイドでもGwenのPassive・E・Nashor'sのOn-hitと非常に相性が良いと評価されるため標準初手とする。Nashor's Toothは攻撃速度/APによる継続DPSが非常に高いが、現行ガイドでは「確実にステータス勝ちできる対面」の攻撃的な初手という位置付け。WR資料は仕様差の確認にのみ使用。" },
+      "ジャックス": { item: "黄昏と暁 → リフトメーカー", reason: "現行PC資料では黄昏と暁をAP系の有力初手として扱い、Jax Eの通常攻撃無効中にNashor'sの攻撃速度を急いで積むより、HP・AH・SpellbladeとOn-hit強化を含む総合性能を優先する。Nashor'sはE後に継続して殴れる展開で2手目以降の候補。" },
+      "トリンダメア": { item: "黄昏と暁 → ナッシャー トゥース", reason: "通常攻撃主体の長期戦ではNashor'sのAS/APが非常に有効。ただし現行PC資料の標準軸はDusk & Dawnなので、まず黄昏と暁でHP・AH・Spellbladeを確保し、その後Nashor'sで継続DPSを伸ばす。" },
       "ヴェイン": { item: "プレートスチールキャップ → 黄昏と暁", reason: "遠距離通常攻撃への耐性を先に確保。接近できた短時間にスキル→通常攻撃を集中させ、Eはコンデム回避用に温存する。" },
       "ダリウス": { item: "黄昏と暁 → リフトメーカー", reason: "Eで接近して短い交換を作りやすく、スキル後の通常攻撃を通せる。外周Qを避けて長期戦に持ち込めるならリフトメーカーの価値が上がる。" },
       "ドクター・ムンド": { item: "黄昏と暁 → リフトメーカー / モレロノミコン", reason: "短い交換と継続火力を両立しやすい。ムンドの回復が勝敗を分けるならモレロノミコンを早め、回復が問題でなければリフトメーカーへ。" },
@@ -822,7 +817,7 @@ const renektonTips = {
       "オラフ": { item: "プレートスチールキャップ → 黄昏と暁", reason: "斧・通常攻撃主体なので靴の価値が高い。R中の長期戦を避け、スキル後の短い通常攻撃を積み重ねる。" },
       "カシオペア": { item: "マーキュリートレッド → 黄昏と暁", reason: "毒と拘束による遠距離戦が厳しいため、まず魔法耐性とCC耐性を確保。接近できた短時間のスキル→通常攻撃を重視する。" },
       "ケネン": { item: "マーキュリートレッド → 黄昏と暁", reason: "魔法ダメージとCCを軽減して接近機会を作る。Eで接近してきたタイミングにWを合わせ、短い交換を繰り返す。" },
-      "レンガー": { item: "プレートスチールキャップ → 黄昏と暁", reason: "通常攻撃主体のレンガーでも、先にSteelcapsで初動を耐えた後はDusk & Dawnを優先。スキル→AAの反撃とHP・ヘイストを確保し、Nashor's Toothはその後の継続DPSへ回す。" }
+      "レンガー": { item: "プレートスチールキャップ → 黄昏と暁", reason: "レンガーの瞬間火力に対してまず防具靴で受け、接近後の短いスキル→通常攻撃を黄昏と暁で強化する。Nashor'sは安全に継続して殴れる状況で後続候補。" }
     };
     const gnarFirstCore = {
       "default": { item: "トリニティフォース → ステラックの篭手", reason: "MOBAFireの現行ガイドで標準軸。移動速度・攻撃速度・スキル後の通常攻撃をまとめて強化し、ミニナーの継続ハラスとメガ時の接近を両立する。" },
@@ -1652,8 +1647,9 @@ const renektonTips = {
         return '【サモナースペル】フラッシュ＋イグナイトを基本。Qの交換からキルラインを作り、オールインの確定力と回復阻害を優先する。テレポートは明確なマクロ上の理由がある場合だけ選択。';
       }
       if (champName === 'グウェン') {
-        // グウェンはPC版のMOBAFire/Onetricksを第一資料とする。WRは仕様確認と翻訳補正に限定。
-        // PCでFlash + Igniteが最大選択肢だが、対面固有のExhaust/Ghost/TP根拠がある場合のみ例外化する。
+        // グウェンはWR現行Diamond+でFlash + Igniteが明確な標準。
+        // PCの高レート資料はTP/Ghost/Exhaustなど選択肢が広いが、WRではFlashを固定し、
+        // 対面固有の根拠がある場合だけ2枠目を変更する。
         if (enemyName === 'リヴェン') {
           return '【サモナースペル】フラッシュ＋イグゾースト。MOBAFireのChallenger Gwen資料ではRiven専用にExhaustを採用し、Rivenのコンボ/Rを軽減して長い戦闘を成立させる。WRではFlashを維持してExhaustを合わせる。';
         }
@@ -2038,7 +2034,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       "エイトロックス": "最優先資料：MOBAFire［26.10］BECOME THE WORLD ENDER | (GRAND)MASTERS AATROX GUIDE（評価10・1002票・62、In-depth、2026-05-13更新）。主軸ビルドはEclipse→Sundered Sky系。補助：MOBAFire［26.4］Fundamentals Of Aatrox（9.5・112票）とOnetricks.gg Masters+ Aatrox。WR資料で赤月の刃/サンダード スカイ/ディヴァイン サンダラーの現行仕様を確認。PC版ランクはWRランクへ読み替えず、DS採用はWR翻訳上の構成条件付き考察とする。",
       "モルデカイザー": "最優先資料：MOBAFire［26.17］Challenger Mordekaiser Top Guide（9.5・273票・15、2026-08-31更新）。標準Top運用として採用。補助：［26.13］同Challenger版。WR側はアイテム/ルーン/仕様確認に限定し、勝率や対面評価の主根拠にはしない。",
       "レネクトン": "最優先資料：MOBAFire［26.17/26.16系］The Ultimate Guide to Renekton by RandumPersin（評価9.5・130票前後、In-depth、2026-03-29更新）。補助：MOBAFire［15.9］Challenger Renekton Guide（評価8.5・246票・39）は現行WRにも通用する対面原理のみ歴史資料として使用。Onetricks.ggのMasters+ Renekton OTP対面別ビルド・ルーン・スペル・レーン統計を実使用傾向の確認に利用。WRサイトはアイテム/ルーン仕様確認に限定し、WR勝率/Tierは相性評価の主根拠にしない。",
-      "グウェン": "最優先資料：PC版MOBAFire［Patch 26.17 Gwen Top統計］と高評価Topガイド［Master+ Gwen Guide \"Snip Snip!\"］、［A humble Gwen top guide］。現行PCではDusk & Dawnを初手/標準コアの主軸として確認し、Nashor\'s Toothは後続コア・条件付き初手候補として扱う。Onetricks.gg Masters+ GwenでOTP実使用傾向を補助確認。WR資料はアイテム存在・仕様確認とPCとの差が明確な場合の補正に限定。Jungle専用・無評価・オフメタは除外。",
+      "グウェン": "主資料：MOBAFire［Master+ Gwen Guide \"Snip Snip!\"］（8.9・85票・9）、［PATCH 26.3］Challenger Gwen Guide（10・223票・21）。Jungle専用・無評価・オフメタは除外。",
       "ナー": "最優先資料：MOBAFire［26.16］Diamond Gnar Guide（10・1737票・85、2026-08-12更新）および現行Gnar Top統計。補助：Onetricks.gg Masters+ Gnar。WR資料は仕様確認に限定し、PC版の対面原理・スペル評価を主基準とする。",
       "オーン": "主資料：MOBAFire［26.17］Master OTP Ornn In-Depth Guide（10・78票）。補助：高レートChallenger系の過去資料。オフメタ・無評価は除外。WRではPの現地購入のみ採用し、SRのアイテム強化は除外。"
     };
@@ -2079,6 +2075,15 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       if (parts.length >= 2) return { first: parts[0], second: parts.slice(1).join(' → ') };
       if (parts.length === 1) return { first: parts[0], second: '対面と試合展開に応じて防御/貫通/継続火力へ分岐' };
       return { first: '個別指定なし', second: '個別指定なし' };
+    }
+
+    function normalizeGwenItemLine(customTips, enemyName) {
+      if (!customTips || !gwenFirstCore) return customTips;
+      const meta = getGwenFirstCore(enemyName);
+      if (!meta || !meta.item) return customTips;
+      const text = String(customTips);
+      if (!text.includes('【アイテム】')) return text;
+      return text.replace(/【アイテム】[^\n<]*(?:<br>)?/, `【アイテム】${meta.item}<br>`);
     }
 
     function getStrictMatchupResearchDetail(champName, enemyName, disposition, customTips) {
@@ -2353,7 +2358,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       } else if (myName === "レネクトン" && renektonTips[enemyName]) {
         customTips = renektonTips[enemyName];
       } else if (myName === "グウェン" && gwenTips[enemyName]) {
-        customTips = gwenTips[enemyName].replace(/\n/g, "<br>");
+        customTips = normalizeGwenItemLine(gwenTips[enemyName].replace(/\n/g, "<br>"), enemyName);
       } else if (myName === "ナー" && gnarTips[enemyName]) {
         customTips = gnarTips[enemyName].replace(/\n/g, "<br>");
       } else if (myName === "オーン" && ornnTips[enemyName]) {
@@ -2624,8 +2629,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     function getSourceTier(champName, enemyName, tip) {
       if (champName === 'モルデカイザー' && enemyName === 'オラフ') return 'B+H：現行WRで存在するステイシス運用＋高レート歴史資料の対面原理';
       if (champName === 'エイトロックス') return 'A/B/H/I：MOBAFire高レートTopを主資料、Onetricks.gg Masters+を実使用傾向、WR資料を現行アイテム仕様、最終判断はWR向け考察として分離';
-      if (champName === 'グウェン') return 'A：PC版MOBAFire/Onetricksを主資料。WRは現行仕様確認と差分補正のみ';
-      if (champName === 'オーン' || champName === 'レネクトン') return 'B：WR Master+公式統計・現行ゲーム内ビルドを補助確認し、PC版高レート資料を相性・運用の主資料とする';
+      if (champName === 'オーン' || champName === 'レネクトン' || champName === 'グウェン') return 'B：WR Master+公式統計・現行ゲーム内ビルドを主資料。対面別の著者ランクを確認できない項目は断定しない';
       return 'B/H/I：現行WR資料・歴史資料・考察を分離して表示';
     }
 
