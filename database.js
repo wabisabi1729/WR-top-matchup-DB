@@ -2841,8 +2841,34 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       if (map && map[enemyName]) return map[enemyName];
       return '';
     }
+    // PC版スタートアイテムをWRへ翻訳する共通ルール。
+    // Doran's Blade -> ロングソード、Doran's Shield -> ルビークリスタル。
+    // APチャンピオンのDoran's RingはWRの増魔の書へ翻訳する。
+    // 遠距離＝常に防御スタートではなく、PC資料でポーク対策としてDShieldが明示される対面を優先。
+    const startItemPokeOverrides = {
+      "エイトロックス": new Set(["ケネン","クレッド","アクシャン","ルシアン","ウーコン","ガングプランク","アーゴット","シンジド","サイオン","ティーモ"]),
+      "レネクトン": new Set(["パンテオン"]),
+      "ナー": new Set(["パンテオン","ジェイス"]),
+      "モルデカイザー": new Set(["パンテオン","ガングプランク"]),
+      "グウェン": new Set(["パンテオン","ガングプランク"])
+    };
+
+    function getTranslatedStartItem(champName, enemyName) {
+      const ranged = rangedEnemies.has(enemyName);
+      const poke = startItemPokeOverrides[champName]?.has(enemyName);
+      const defensive = ranged || poke;
+      if (["モルデカイザー","グウェン"].includes(champName)) {
+        return defensive ? "ルビークリスタル" : "増魔の書";
+      }
+      if (["エイトロックス","レネクトン","ナー"].includes(champName)) {
+        return defensive ? "ルビークリスタル" : "ロングソード";
+      }
+      return "未指定";
+    }
+
     function getStageData(champName, enemyName) {
       let detail = null;
+      const translatedStart = getTranslatedStartItem(champName, enemyName);
       try { detail = getStrictMatchupResearchDetail(champName, enemyName, getMatchupDisposition(champName, enemyName, false), getSpecificResearch(champName, enemyName)); } catch(e) {}
       if (champName === 'オーン' && ornnMatchupDetails[enemyName]) {
         const d = ornnMatchupDetails[enemyName];
@@ -2850,15 +2876,15 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       }
       if (champName === 'モルデカイザー' && mordekaiserFirstCore[enemyName]) {
         const arr = mordekaiserFirstCore[enemyName].item.split(' → ');
-        return { firstPurchase:'対面指定あり', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:mordekaiserFirstCore[enemyName].reason };
+        return { firstPurchase:translatedStart, firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:mordekaiserFirstCore[enemyName].reason };
       }
       if (champName === 'レネクトン' && renektonFirstCore[enemyName]) {
         const arr = renektonFirstCore[enemyName].item.split(' → ');
-        return { firstPurchase:'対面指定あり', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:renektonFirstCore[enemyName].reason };
+        return { firstPurchase:translatedStart, firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:renektonFirstCore[enemyName].reason };
       }
       if (champName === 'グウェン' && gwenFirstCore[enemyName]) {
         const arr = gwenFirstCore[enemyName].item.split(' → ');
-        return { firstPurchase:'対面指定あり', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:gwenFirstCore[enemyName].reason };
+        return { firstPurchase:translatedStart, firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:gwenFirstCore[enemyName].reason };
       }
       if (champName === 'エイトロックス') {
         const a = getAatroxFirstCore(enemyName);
@@ -2872,9 +2898,9 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       }
       if (champName === 'ナー' && gnarFirstCore[enemyName]) {
         const arr = gnarFirstCore[enemyName].item.split(' → ');
-        return { firstPurchase:'対面指定あり', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:gnarFirstCore[enemyName].reason };
+        return { firstPurchase:translatedStart, firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:gnarFirstCore[enemyName].reason };
       }
-      if (detail) return { firstPurchase:detail.firstComponent, firstCore:detail.firstCompleted, secondCore:detail.secondCore, reason:detail.reason };
+      if (detail) return { firstPurchase:translatedStart !== '未指定' ? translatedStart : detail.firstComponent, firstCore:detail.firstCompleted, secondCore:detail.secondCore, reason:detail.reason };
       return { firstPurchase:'未指定', firstCore:'未指定', secondCore:'試合展開で分岐', reason:'個別の高レート資料で確認できるまで断定しない。' };
     }
     function getSourceTier(champName, enemyName, tip) {
