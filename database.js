@@ -1812,24 +1812,59 @@ const renektonTips = {
 
     
     const fioraFirstCore = {
-      // WRではSpellblade系の追撃アイテムを同時に積めないため、
-      // Divine Sunderer と Trinity Force は同じビルド列に置かない。
-      // DSを選ぶ対面は2手目をDeath's Danceへ、Trinityを選ぶ対面も2手目をDeath's Danceへ分離する。
-      "マルファイト": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高防御・高HP対面。DSのHP＋Spellbladeで接近後の交換を安定させ、2手目は別系統の防御火力としてデスダンスへ分離する。" },
-      "オーン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HPタンクへDSのHP＋Spellbladeを優先候補。Trinityとの併用はせず、2手目はデスダンスで継続戦闘力を補う。" },
-      "タム・ケンチ": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HP＋灰色体力へ長く触る対面なのでDSを候補にする。2手目は別の追撃系ではなくデスダンスへ分離する。" },
-      "チョーガス": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "最大HPが伸びる相手へDSのHP＋Spellbladeを優先候補。急所の確定ダメージと合わせ、2手目はデスダンスで継続戦闘を補う。" },
-      "ドクター・ムンド": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HP・回復型なのでDSを候補にし、回復阻害と合わせて長い交換を成立させる。2手目にTrinityを重ねない。" },
-      "ボリベア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "ボリベアではDS固定よりTrinityを優先候補。AS・移動速度・SpellbladeでQ接近を避けて再交換し、2手目はデスダンスへ。" },
-      "ケネン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "強いAPポーク対面ではHPを先に確保し、DS完成後の接近交換を安定させる。2手目はデスダンスへ分離する。" },
-      "ヴァルス": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "長射程ポークに対してRuby Crystalで序盤の体力余裕を作り、DSで接近戦へ翻訳する。Trinityは同時に積まない。" },
-      "ヴェイン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "強いAA・E対面なのでHPを確保し、DSで再接近を安定させる。BORKを無条件の初手にはせず、2手目はデスダンスへ。" },
-      "クイン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ルビークリスタル", reason: "射程差を詰める必要があるためTrinityの移動性能とSpellbladeを優先候補。2手目はデスダンスへ分離する。" },
-      "ティーモ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ルビークリスタル", reason: "接近性能と短い交換を優先し、Trinityの移動速度・Spellbladeを活かす。強いポークにはRubyを合わせ、2手目はデスダンスへ。" },
-      "ダリウス": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "Qで内側へ入り直して短く交換するためTrinityの移動性能を優先候補。2手目はデスダンスへ分離する。" },
-      "トリンダメア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "短い交換と再接近を繰り返し、Trinityで追撃性能を確保。無敵終了後に処理するため2手目はデスダンスへ。" },
-      "レンガー": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "草むらからの接近を避けて再交換するためTrinityを優先候補。2手目はデスダンスへ分離する。" }
-    };;
+      // PC側MOBAFireのFiora Handbookを主資料に、WRではアイテムの存在・仕様だけを確認。
+      // Ravenous HydraはWRにないため、通常ルートはTrinity Force、高HP対面はDivine Sundererへ役割を翻訳。
+      // Trinity ForceとDivine Sundererは同じビルド列に置かない。2コアは対面への回答で分岐する。
+      "アーゴット": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "通常の近接デュエル枠。TFでQの急所取りとSpellbladeの再接近を強化し、2コアは物理継続火力に対するデスダンス。" },
+      "アカリ": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ロングソード", reason: "APバースト対面。序盤からQで急所を触り、TFで接近と短い交換を作る。2コアはマルモティウスの胃袋でAPバーストへの回答を作る。" },
+      "アンベッサ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "高機動ADファイター。アンベッサのダッシュ後にQで急所へ入り直すためTFを優先し、2コアは物理バースト耐性のデスダンス。" },
+      "イラオイ": { item: "ディヴァイン サンダラー → ブラック クリーバー", firstPurchase: "ロングソード", reason: "高HP・長期戦型。DSでHPとSpellbladeを確保し、2コアはブラック クリーバーで継続戦闘中の防御を崩す。Rを先に吐かせてから再接近する対面。" },
+      "イレリア": { item: "トリニティ フォース → フローズンハート", firstPurchase: "ロングソード", reason: "AAとQ連打のAS依存デュエラー。TFで移動とSpellbladeを確保し、2コアはフローズンハートで継続AAを抑える。" },
+      "ヴァルス": { item: "トリニティ フォース → ルインドキングブレード", firstPurchase: "ルビークリスタル", reason: "強ポークのレンジ対面。Ruby Crystal＋息継ぎでレーンを安定させ、TFで接近窓を作る。2コアは王剣を状況候補として、捕まえた後の継続削りを伸ばす。" },
+      "ヴェイン": { item: "トリニティ フォース → ルインドキングブレード", firstPurchase: "ルビークリスタル", reason: "AA＋Eのレンジ対面。Ruby Crystalで序盤を耐え、TFの移動性能でEの射程外から接近。2コアは王剣で捕まえた後の削りを強化する。" },
+      "ウーコン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "ADファイター。E接近にWを合わせてから短く交換し、TFで再接近を強化。2コアはデスダンスでRを含む物理継続戦闘に対応。" },
+      "ウディア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "高基礎火力の近接型。強化Rを使わせてから交換し、TFで追撃と離脱を作る。2コアはデスダンスで長い物理戦闘を受ける。" },
+      "エイトロックス": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "Fiora側が明確に有利なAD対面。QでAatroxのQを外し、Wを3段目Qや引き寄せに合わせる。TFで短い再接近を強化し、2コアはデスダンス。" },
+      "オーロラ": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "遠距離AP。Ruby Crystalでポークを受ける余裕を作り、TFで接近。2コアはマルモティウスの胃袋でAPバーストとRゾーンへの回答を作る。" },
+      "オーン": { item: "ディヴァイン サンダラー → ルインドキングブレード", firstPurchase: "ロングソード", reason: "高HPタンク。DSを1コア候補にし、SpellbladeとHPで長期交換を安定させる。2コアは王剣でHPを削り、急所と合わせてタンクを処理する。" },
+      "オラフ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "AD継続戦闘型。Lv3以降まで無理せず、EをWで受ける。TFで短い交換を作り、2コアはデスダンス。R中はCCを当てる前提で戦わない。" },
+      "カ・サンテ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "デュエラー＋高耐久。Qでカ・サンテQを避け、Wは3段目Qかオールインに合わせる。TFで継続接触を作り、2コアはデスダンス。" },
+      "ガングプランク": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ルビークリスタル", reason: "強ポーク＋サイド適性のレンジ対面。Ruby Crystalで初期Qを受け、TFで樽の隙を突いて接近。2コアはハルブレイカーでサイド圧を高める。" },
+      "ガレン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "Q接近とE回転を切り分けるAD対面。Qで急所を取り、QサイレンスをWで受ける。TFで再接近、2コアはデスダンス。" },
+      "カミール": { item: "トリニティ フォース → エクリプス", firstPurchase: "ロングソード", reason: "デュエラー対面。Camille Eを外させ、Q2やEをWで返す。TFで移動とSpellbladeを確保し、2コアはデュエル性能を伸ばすエクリプス。" },
+      "カシオペア": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "APポーク＋高DPS。強化QやRをWで受けるより、まず接近窓を作る。Ruby Crystal開始からTF、2コアはマルモティウスの胃袋。" },
+      "クレッド": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "序盤の近接オールイン型。Lv2からWでQ2を返し、騎乗中の長期戦を避ける。TFで再接近し、2コアはデスダンス。" },
+      "グウェン": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ロングソード", reason: "APデュエラー。Q4やRの重要ダメージをWで返し、長期戦では急所を優先。TFで移動と短い接触を作り、2コアはAP耐性のマルモティウスの胃袋。" },
+      "クイン": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ルビークリスタル", reason: "レンジ＋Eノックバック。Ruby Crystalで序盤を耐え、TFの移動性能でE後に再接近。2コアはハルブレイカーでサイド圧を高める。" },
+      "グラガス": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ロングソード", reason: "高基礎APダメージ＋回復型。EをWで返し、樽の爆発はQで避ける。TFで接触時間を短くし、2コアはマルモティウスの胃袋を優先候補。" },
+      "ケイル": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ロングソード", reason: "スケール阻止が主目的。Lv1〜4に圧力をかけ、自由なCSを許さない。TFで追撃性能を作り、2コアはハルブレイカーでサイド圧を継続。" },
+      "ケネン": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "強ポーク＋CCのAP対面。Ruby Crystal＋息継ぎでHPを残し、スタック2を見てW。TFで接近し、2コアはマルモティウスの胃袋。" },
+      "サイオン": { item: "ディヴァイン サンダラー → ルインドキングブレード", firstPurchase: "ロングソード", reason: "高HPタンク。Q溜めやRをWで受け、DSのHP＋Spellbladeで長期戦を安定。2コアは王剣で最大HPを削る。" },
+      "セト": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "ADファイター。W中心をQで避け、EやQをWで受ける。TFで短い交換を繰り返し、2コアはデスダンス。" },
+      "タム・ケンチ": { item: "ディヴァイン サンダラー → ルインドキングブレード", firstPurchase: "ロングソード", reason: "高HP＋灰色体力。序盤は無理せずQを避け、Lv5以降にDSで長期戦へ。2コアは王剣でHPを削り、急所と合わせる。" },
+      "ダリウス": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "長い交換を避けるAD対面。Q内側へ入り、WはE引き寄せやRへ。TFで再接近し、2コアはデスダンス。" },
+      "チョーガス": { item: "ディヴァイン サンダラー → ルインドキングブレード", firstPurchase: "ロングソード", reason: "最大HPタンク。沈黙でWを潰されないようにし、DSでHP＋Spellbladeを確保。2コアは王剣でHPを削る。" },
+      "ティーモ": { item: "トリニティ フォース → ルインドキングブレード", firstPurchase: "ルビークリスタル", reason: "レンジポーク。Dシールド相当としてRuby Crystal＋息継ぎで序盤を耐え、WでQブラインドを受けて接近。TF後の2コアは王剣で捕まえた後の継続削り。" },
+      "ドクター・ムンド": { item: "ディヴァイン サンダラー → ルインドキングブレード", firstPurchase: "ロングソード", reason: "高HP＋高回復。DSで長期交換を成立させ、回復阻害を別途前倒し。2コアは王剣でHPを削る。" },
+      "トリンダメア": { item: "トリニティ フォース → フローズンハート", firstPurchase: "ロングソード", reason: "AA主体のデュエラー。怒り最大時を避け、R終了後に処理。TFで再接近し、2コアはフローズンハートでASを抑える。" },
+      "ナサス": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ロングソード", reason: "スケール阻止とサイド圧。序盤からCSを咎め、R中は離れる。TFで追撃性能を作り、2コアはハルブレイカーでサイドの圧力を維持。" },
+      "ナー": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ルビークリスタル", reason: "レンジ形態＋サイド適性。Ruby Crystalで初期ポークを受け、Eを使わせてから再接近。TF後はハルブレイカーでサイド圧を強化。" },
+      "ハイマーディンガー": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "APゾーニング対面。タレットを減らし、スタンをWで返す。Ruby Crystalで耐えつつTFで接近し、2コアはマルモティウスの胃袋を候補。" },
+      "ポッピー": { item: "トリニティ フォース → ブラック クリーバー", firstPurchase: "ロングソード", reason: "Fiora側の難関。W中にQで飛び込まず、壁際EをWで返す。TF完成後、2コアはブラック クリーバーで防具とHPを崩す。" },
+      "ボリベア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "序盤から強い近接型。EシールドとW2を意識し、Qで短く離脱。DSよりTFを優先し、2コアはデスダンス。" },
+      "リヴェン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "高機動ADデュエラー。3段目Q/WスタンをWで受け、Wがない時間は戦わない。TFで再接近し、2コアはデスダンス。" },
+      "レンガー": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "草むら起点のADバースト。序盤は茂み外へ誘導し、強化Qや着地後の主要攻撃をW。TFで追撃し、2コアはデスダンス。" },
+      "ワーウィック": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "序盤の高火力＋回復を警戒。E恐怖/RをWで受け、必要なら回復阻害を前倒し。TFで接近と離脱を作り、2コアはデスダンス。" },
+      "ヨリック": { item: "トリニティ フォース → ルインドキングブレード", firstPurchase: "ロングソード", reason: "長期サイド戦＋高HP。Eを避けてから接近し、W壁をQで抜ける。TFで追撃を作り、2コアは王剣で継続削り。回復阻害は別途状況購入。" },
+      "ヨネ": { item: "トリニティ フォース → フローズンハート", firstPurchase: "ロングソード", reason: "AS依存のADデュエラー。Q3やE復帰をWで処理し、長追いしない。TFで再接近、2コアはフローズンハートでAA密度を下げる。" },
+      "ライズ": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "AP＋スネア＋フェイズラッシュ。Ruby Crystalで序盤のポークを受け、スネアをWで返す。TFで接近し、2コアはマルモティウスの胃袋。" },
+      "ランブル": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ルビークリスタル", reason: "AP継続火力。Q火炎とEのハープーンが切れた瞬間に短く入る。Ruby Crystal開始からTF、2コアはマルモティウスの胃袋。" },
+      "レック＝サイ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "ADファイター。地下Wノックアップを避け、EノックアップをWで受ける。TFで短い再接近を作り、2コアはデスダンス。" },
+      "レネクトン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "Fiora側の難関AD対面。怒り50以上の強化Wを最警戒し、Wで強化WかE接近を返す。TFで短い交換、2コアはデスダンス。" },
+      "ザック": { item: "トリニティ フォース → マルモティウスの胃袋", firstPurchase: "ロングソード", reason: "AP/HP型の継続戦闘。EジャンプをWで受け、スライム回収を許さない。TFで接近し、2コアはマルモティウスの胃袋を候補。" },
+      "スカーナー": { item: "トリニティ フォース → ブラック クリーバー", firstPurchase: "ロングソード", reason: "高耐久AD/タンク。Eで壁へ押し込まれる展開をWで返し、TFでサイドの継続戦闘を強化。2コアはブラック クリーバーで防御を崩す。" },
+      "シェン": { item: "トリニティ フォース → ハルブレイカー", firstPurchase: "ロングソード", reason: "サイド圧でRを咎める対面。Qの強化AAをWで返し、Rで離脱されたらウェーブとタワーを取る。TF後はハルブレイカーでR不在時間を最大化。" }
+    };
 
     function getFioraFirstCore(enemyName) {
       if (fioraFirstCore[enemyName]) return fioraFirstCore[enemyName];
@@ -2278,7 +2313,22 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
           firstCompleted: parts[0] || 'トリニティ フォース',
           secondCore: parts.slice(1).join(' → ') || 'デスダンス',
           reason: a.reason,
-          itemAnalysis: '【トリニティ フォース】LungeとのSpellblade相性と移動性能を活かす一般候補。 【ディヴァイン サンダラー】高HP相手でHP＋Spellbladeを取りたい場合の代替候補。WRではこの2つを同時に積まず、どちらか一方だけを追撃枠として採用する。 【デスダンス】追撃枠とは別系統の2手目候補。 【タイタニック ハイドラ】はWRに存在するが、現時点では対面別の主要コアとして固定せず状況候補に留める。',
+          itemAnalysis: (() => {
+            const first = parts[0] || '';
+            const second = parts.slice(1).join(' → ') || '';
+            const notes = {
+              'トリニティ フォース': 'Q（Lunge）でSpellbladeを発動でき、移動速度も接近・離脱に寄与する。Fioraの通常ルート候補。',
+              'ディヴァイン サンダラー': '高HP相手へHP＋Spellbladeを取りに行くWR側の代替候補。Trinity Forceとは同時に積まない。',
+              'デスダンス': '物理バースト・継続戦闘への2コア回答。対面がAD主体のときに優先。',
+              'フローズンハート': 'AS/AA依存のADデュエラーへの対面回答。',
+              'マルモティウスの胃袋': 'APバーストへの回答。WR現行アイテムとして存在する。',
+              'エクリプス': 'デュエラー相手の継続戦闘を補強する候補。',
+              'ブラック クリーバー': '防具を積む近接・タンクへの継続戦闘用候補。',
+              'ルインドキングブレード': '高HP・継続AAが必要な相手への状況候補。Fioraの標準1コアには固定しない。',
+              'ハルブレイカー': 'サイドプッシュと1v1圧力を伸ばす候補。',
+            };
+            return `【${first}】${notes[first] || '対面別に選択する候補。'} 【${second}】${notes[second] || '2コアは対面の主要ダメージ・防御特性に合わせて選択。'} WRでは追撃系の同時採用を避け、1コアの役割と2コアの対面回答を分離する。`;
+          })(),
           source: strictSourceProfiles[champName] || 'MOBAFireのFiora Handbookを主資料。WR資料は現行アイテム存在・仕様確認に限定。'
         };
       }
@@ -2678,7 +2728,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       "グウェン": "WR Master+公式統計を確認。現行ビルドはWR資料を優先し、個別対面は既存考察を補助資料として扱う。",
       "ナー": "WR現行ビルド資料を優先。個別対面の高レート記事が確認できない場合は考察扱い。",
       "オーン": "WR Master+公式統計・現行WRビルド資料を優先。PC版MOBAFireのMaster表記はWR資料として採用しない。",
-      "フィオラ": "MOBAFire現行Fiora Handbook（Patch 26.17）を主資料。PCの対面評価・立ち回り・スペル傾向を優先し、WRはアイテム存在/仕様と現行環境確認に限定。Ravenous HydraはWRにないため、DS/Trinity/Titanic Hydraへ役割を翻訳。"
+      "フィオラ": "MOBAFire現行Fiora Handbook（Patch 26.17、2026-09-06更新）を主資料。PCの対面評価・立ち回り・アイテム分岐を優先し、Onetricks.ggの高レート対面傾向を補助。WRはアイテム存在/仕様と現行環境確認に限定。Ravenous HydraはWRにないため、通常ルートをTrinity Force、高HP対面をDivine Sundererへ役割翻訳。Trinity ForceとDivine Sundererは同時採用しない。"
     };
 
     const currentWrGlobalStats = {
