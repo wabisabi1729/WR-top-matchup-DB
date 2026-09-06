@@ -2507,7 +2507,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       "グウェン",
       "オーン",
       "ナー",
-      "モルデカイザー"
+      "モルデカイザー",
+      "フィオラ"
     ]);
 
     function getMyChampionSuggestions(query) {
