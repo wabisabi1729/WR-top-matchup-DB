@@ -3392,6 +3392,15 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
         <div class="section-block"><div class="section-title matchup">◆ ${myName} vs ${enemyName} の個別対策</div><div class="tips-content">${tip}</div></div>
         <div class="section-block"><div class="section-title matchup">◆ この対面で絶対にやってはいけないこと</div><div class="tips-content never-do">${neverDoText(myName,enemyName,disposition,tip)}</div></div>
         <div class="section-block"><div class="section-title feature">◆ 実戦判断</div><div class="tips-content"><strong>【苦しい時間帯】</strong><br>${detail.difficulty}<br><br><strong>【相手の勝ち筋】</strong><br>${detail.enemyWin}<br><br><strong>【ダメージトレード】</strong><br>${detail.trade}<br><br><strong>【ルーン】</strong><br>${detail.rune}<br><br><strong>【スペル】</strong><br>${detail.spell}</div></div>
+        ${(() => {
+          const skillTip = (championSkillMatchups[myName] && championSkillMatchups[myName][enemyName]) || championSkillTips[myName] || null;
+          if (!skillTip) return '';
+          return `<div class="section-block"><div class="section-title feature">◆ スキル取り・上げ</div>
+            <div class="tips-content"><strong>【基本順】</strong><br>${skillTip.order}</div>
+            <div class="tips-content" style="margin-top:10px;"><strong>【スキル運用】</strong><br>${skillTip.detail}</div>
+            <div class="tips-content" style="margin-top:10px;"><strong>【対面別判断】</strong><br>${skillTip.matchup}</div>
+          </div>`;
+        })()}
         <div class="section-block"><div class="section-title feature">◆ 資料監査</div><div class="source-tier"><strong>資料ランク：</strong>${getSourceTier(myName,enemyName,tip)}<br>${source}</div></div>`;
       container.innerHTML=''; container.appendChild(card);
     };
