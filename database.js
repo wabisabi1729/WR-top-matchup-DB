@@ -1726,9 +1726,17 @@ const renektonTips = {
         if (["マルファイト","ナサス","ヨネ","ケイル","オーン"].includes(enemyName)) return 'advantage';
       }
       if (champName === 'フィオラ') {
+        // Fioraは対面Tipsそのものを一次の評価根拠にする。
+        // 固定リストにない49対面も、fioraTipsの【相性: ...】を読んで評価する。
+        const fioraTip = fioraTips?.[enemyName];
+        if (fioraTip) {
+          const firstLine = String(fioraTip).split(/<br>|\n/)[0];
+          if (/極めて不利|非常に不利|明確に不利|かなり不利|不利|ハードカウンター|絶対天敵/.test(firstLine)) return 'disadvantage';
+          if (/極めて有利|非常に有利|明確に有利|かなり有利|微有利|有利/.test(firstLine) && !/五分/.test(firstLine)) return 'advantage';
+          if (/五分|微不利|微有利/.test(firstLine)) return 'even';
+        }
+        // Tipsにない将来追加対面用の最低限フォールバック。
         if (['タム・ケンチ','ポッピー','レネクトン','ダリウス','ケネン','レンガー'].includes(enemyName)) return 'disadvantage';
-        if (['オーン','エイトロックス','カ・サンテ','オラフ','カミール','クレッド','ガレン','イレリア','ケイル','ナサス','チョーガス','ティーモ','ヨリック','ヨネ','ライズ','ランブル','レック＝サイ','スカーナー','ザック','シェン','ウディア','ウーコン','ヴァルス'].includes(enemyName)) return 'advantage';
-        if (['グウェン','ヴェイン','ヴァルス','トリンダメア','セト','イラオイ','アンベッサ','アカリ','トリンダメア'].includes(enemyName)) return 'even';
       }
       const override = currentWrRuneOverrides[champName];
       if (override?.advantage.has(enemyName)) return "advantage";
@@ -1804,32 +1812,35 @@ const renektonTips = {
 
     
     const fioraFirstCore = {
-      "マルファイト": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高防御・高HPへSpellbladeとHPを持つDSを優先候補。WRに存在しないRavenous Hydraの役割をそのままコピーせず、対タンク用のHP＋継続戦闘へ翻訳する。" },
-      "オーン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HPタンクなのでDSのHP・Spellblade・継続交換性能を優先候補。防具完成後も急所の確定ダメージと合わせてサイド圧を維持する。" },
-      "タム・ケンチ": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HP＋灰色体力へ長く触る必要があるためDSを優先候補。Ravenous HydraがWRにないため、HPとSpellbladeで役割を代替する。" },
-      "チョーガス": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "最大HPが伸びる相手へDSのHP＋Spellbladeを優先候補。急所の確定ダメージと合わせて長期戦の価値を上げる。" },
-      "ドクター・ムンド": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HP・回復型なのでDSを候補にし、Ignite/回復阻害と合わせて長い交換を成立させる。" },
-      "ボリベア": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "ボリベアではDS固定よりTrinityを優先候補。AS・移動速度・SpellbladeでQ接近を避けながら再交換しやすくする。" },
-      "ケネン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "強いAPポーク対面ではHPを先に確保し、DSを完成させて接近後の交換を安定させる。" },
-      "ヴァルス": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "長射程ポークに対してRuby Crystalで序盤の体力余裕を作り、DSのHPを確保して接近戦へ翻訳する。" },
-      "ヴェイン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "DShield/Ruby系の耐久スタートを優先し、HPを持つDSでE後の再接近を安定させる。BORKを無条件の初手にはしない。" },
-      "クイン": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ルビークリスタル", reason: "射程差を詰める必要があるためTrinityの移動性能とSpellbladeを優先候補。Rubyで強いポークを受ける序盤を安定させる。" },
-      "ティーモ": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ルビークリスタル", reason: "接近性能と短い交換を優先し、Trinityの移動速度・Spellbladeを活かす。強いポークにはRubyを合わせる。" },
-      "ダリウス": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "長い追走を避けてQで内側へ入り直すため、Trinityの移動性能とSpellbladeを優先候補。TPでウェーブ管理を補う。" },
-      "トリンダメア": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "短い交換と再接近を繰り返し、Trinityで追撃性能を確保。R後の無敵時間を待ってから倒すためIgnite/TPを状況分岐する。" },
-      "レンガー": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "草むらからの接近を避けて再交換するためTrinityを優先候補。序盤の耐久より位置取りとQ移動を重視。" }
-    };
+      // WRではSpellblade系の追撃アイテムを同時に積めないため、
+      // Divine Sunderer と Trinity Force は同じビルド列に置かない。
+      // DSを選ぶ対面は2手目をDeath's Danceへ、Trinityを選ぶ対面も2手目をDeath's Danceへ分離する。
+      "マルファイト": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高防御・高HP対面。DSのHP＋Spellbladeで接近後の交換を安定させ、2手目は別系統の防御火力としてデスダンスへ分離する。" },
+      "オーン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HPタンクへDSのHP＋Spellbladeを優先候補。Trinityとの併用はせず、2手目はデスダンスで継続戦闘力を補う。" },
+      "タム・ケンチ": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HP＋灰色体力へ長く触る対面なのでDSを候補にする。2手目は別の追撃系ではなくデスダンスへ分離する。" },
+      "チョーガス": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "最大HPが伸びる相手へDSのHP＋Spellbladeを優先候補。急所の確定ダメージと合わせ、2手目はデスダンスで継続戦闘を補う。" },
+      "ドクター・ムンド": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ロングソード", reason: "高HP・回復型なのでDSを候補にし、回復阻害と合わせて長い交換を成立させる。2手目にTrinityを重ねない。" },
+      "ボリベア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "ボリベアではDS固定よりTrinityを優先候補。AS・移動速度・SpellbladeでQ接近を避けて再交換し、2手目はデスダンスへ。" },
+      "ケネン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "強いAPポーク対面ではHPを先に確保し、DS完成後の接近交換を安定させる。2手目はデスダンスへ分離する。" },
+      "ヴァルス": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "長射程ポークに対してRuby Crystalで序盤の体力余裕を作り、DSで接近戦へ翻訳する。Trinityは同時に積まない。" },
+      "ヴェイン": { item: "ディヴァイン サンダラー → デスダンス", firstPurchase: "ルビークリスタル", reason: "強いAA・E対面なのでHPを確保し、DSで再接近を安定させる。BORKを無条件の初手にはせず、2手目はデスダンスへ。" },
+      "クイン": { item: "トリニティ フォース → デスダンス", firstPurchase: "ルビークリスタル", reason: "射程差を詰める必要があるためTrinityの移動性能とSpellbladeを優先候補。2手目はデスダンスへ分離する。" },
+      "ティーモ": { item: "トリニティ フォース → デスダンス", firstPurchase: "ルビークリスタル", reason: "接近性能と短い交換を優先し、Trinityの移動速度・Spellbladeを活かす。強いポークにはRubyを合わせ、2手目はデスダンスへ。" },
+      "ダリウス": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "Qで内側へ入り直して短く交換するためTrinityの移動性能を優先候補。2手目はデスダンスへ分離する。" },
+      "トリンダメア": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "短い交換と再接近を繰り返し、Trinityで追撃性能を確保。無敵終了後に処理するため2手目はデスダンスへ。" },
+      "レンガー": { item: "トリニティ フォース → デスダンス", firstPurchase: "ロングソード", reason: "草むらからの接近を避けて再交換するためTrinityを優先候補。2手目はデスダンスへ分離する。" }
+    };;
 
     function getFioraFirstCore(enemyName) {
       if (fioraFirstCore[enemyName]) return fioraFirstCore[enemyName];
       const ranged = rangedEnemies.has(enemyName);
-      const item = ranged ? "ディヴァイン サンダラー → トリニティ フォース" : "トリニティ フォース → ディヴァイン サンダラー";
+      const item = ranged ? "トリニティ フォース → デスダンス" : "トリニティ フォース → デスダンス";
       return {
         item,
         firstPurchase: ranged ? "ルビークリスタル" : "ロングソード",
         reason: ranged
-          ? "強いポークにはRuby Crystalで序盤のHPを確保。WRにRavenous Hydraがないため、HPを持つDSまたは接近性能の高いTrinityへ役割を翻訳する。"
-          : "通常近接対面はLong Swordを基本。Ravenous HydraはWRに存在しないため、Trinityを一般的な継続戦闘・移動性能の候補、DSを高HP/タンク対策の候補として分岐する。"
+          ? "強いポークにはRuby Crystalで序盤のHPを確保。接近性能が必要なのでTrinityを候補にし、2手目は別系統のデスダンスへ分離する。DSとは同時に積まない。"
+          : "通常近接対面はLong Swordを基本。Ravenous HydraはWRに存在しないため、Trinityを一般的な継続戦闘・移動性能の候補として採用し、2手目はデスダンスへ分離する。DSとは同時に積まない。"
       };
     }
 
@@ -2242,6 +2253,34 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
             source: d.source_note || strictSourceProfiles[champName]
           };
         }
+      }
+
+      if (champName === 'フィオラ') {
+        const a = getFioraFirstCore(enemyName);
+        const runeSet = getMatchupRuneSet(champName, enemyName, disposition);
+        const spell = getChampionSpellTip(champName, enemyName) || '【サモナースペル】フラッシュ＋イグナイトを基本。';
+        const parts = a.item.split(' → ');
+        const raw = stripTipForDetail(customTips);
+        let difficulty = 'Lv1〜2は急所を取りながら無理なく主導権を作り、Lv3〜4は相手の主要スキルを見てWを温存。Lv5以降はRの急所4つ完成を勝ち筋にする。';
+        if (/Lv1|Lv3|Lv5|Lv6|序盤|終盤/.test(raw)) {
+          difficulty = raw.split(/。/).filter(Boolean).slice(0, 2).join('。') + '。';
+        }
+        const enemyWin = raw || '相手の決定的なCC・火力をWで受ける前にパリィを使わせ、急所のない正面戦へ持ち込むこと。';
+        const trade = raw || '相手の主要スキルを確認してからQで急所へ入り、Wを決定的なCC/火力に合わせる。長追いせず再交換する。';
+        return {
+          recommendation: a.item,
+          rune: runeSet.runeText,
+          spell,
+          difficulty,
+          enemyWin,
+          trade,
+          firstComponent: a.firstPurchase || inferFirstPurchase(champName, enemyName, a.item, disposition),
+          firstCompleted: parts[0] || 'トリニティ フォース',
+          secondCore: parts.slice(1).join(' → ') || 'デスダンス',
+          reason: a.reason,
+          itemAnalysis: '【トリニティ フォース】LungeとのSpellblade相性と移動性能を活かす一般候補。 【ディヴァイン サンダラー】高HP相手でHP＋Spellbladeを取りたい場合の代替候補。WRではこの2つを同時に積まず、どちらか一方だけを追撃枠として採用する。 【デスダンス】追撃枠とは別系統の2手目候補。 【タイタニック ハイドラ】はWRに存在するが、現時点では対面別の主要コアとして固定せず状況候補に留める。',
+          source: strictSourceProfiles[champName] || 'MOBAFireのFiora Handbookを主資料。WR資料は現行アイテム存在・仕様確認に限定。'
+        };
       }
 
       const core = getChampionCoreText(champName, enemyName);
