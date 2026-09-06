@@ -1676,6 +1676,12 @@ const renektonTips = {
         if (["グウェン","フィオラ","レネクトン","イレリア"].includes(enemyName)) return '【サモナースペル】フラッシュ＋テレポートを基本。序盤を耐えて1コア以降の集団戦へ持ち込む。';
         return '【サモナースペル】フラッシュ＋テレポートを基本。R始動・Eフラッシュ・視界確保で集団戦に先手を取る。';
       }
+      if (champName === 'フィオラ') {
+        if (['ダリウス','トリンダメア','マルファイト'].includes(enemyName)) {
+          return '【サモナースペル】フラッシュ＋テレポート。PCの高レートFioraではTP採用が一定数あり、これらの対面ではキル圧だけでなくレーン復帰・ウェーブ管理の価値が高い。';
+        }
+        return '【サモナースペル】フラッシュ＋イグナイトを基本。現行PC Top統計でFlash + Igniteが明確な標準で、Fioraの急所＋Rのオールインへ追加ダメージと回復阻害を重ねる。遠隔/強ポークではIgniteを維持しつつ、Ruby Crystal＋息継ぎでレーンを安定させる。';
+      }
       if (champName === 'ナー') {
         // PC版高レートTopを第一基準。MOBAFire現行Top統計ではFlash + Teleportが68%、
         // Flash + Igniteが20%。高評価GnarガイドもTeleportを標準、Igniteを明確に雪玉化できる対面の選択肢としている。
@@ -1718,6 +1724,11 @@ const renektonTips = {
         if (["フィオラ","イレリア","アンベッサ"].includes(enemyName)) return 'extreme';
         if (["レネクトン","グウェン","ジャックス","リヴェン","ポッピー","ヴェイン","クイン"].includes(enemyName)) return 'disadvantage';
         if (["マルファイト","ナサス","ヨネ","ケイル","オーン"].includes(enemyName)) return 'advantage';
+      }
+      if (champName === 'フィオラ') {
+        if (['タム・ケンチ','ポッピー','レネクトン','ダリウス','ケネン','レンガー'].includes(enemyName)) return 'disadvantage';
+        if (['オーン','エイトロックス','カ・サンテ','オラフ','カミール','クレッド','ガレン','イレリア','ケイル','ナサス','チョーガス','ティーモ','ヨリック','ヨネ','ライズ','ランブル','レック＝サイ','スカーナー','ザック','シェン','ウディア','ウーコン','ヴァルス'].includes(enemyName)) return 'advantage';
+        if (['グウェン','ヴェイン','ヴァルス','トリンダメア','セト','イラオイ','アンベッサ','アカリ','トリンダメア'].includes(enemyName)) return 'even';
       }
       const override = currentWrRuneOverrides[champName];
       if (override?.advantage.has(enemyName)) return "advantage";
@@ -1791,6 +1802,38 @@ const renektonTips = {
     aatroxFirstCore["フィオラ"] = { item: "赤月の刃 → サンダード スカイ", firstPurchase: "エクスキューショナー系を優先候補", reason: "MOBAFireではフィオラに対して回復阻害の早期購入が強く推奨される。完成コアは赤月の刃を主軸にしてQ/Eの短い接触で圧力を作り、次にサンダード スカイで1回目のAAと回復効率を補う。DSはフィオラ単体の対面では優先度を上げない。" };
     function getAatroxFirstCore(enemyName) { return aatroxFirstCore[enemyName] || aatroxFirstCore.default; }
 
+    
+    const fioraFirstCore = {
+      "マルファイト": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高防御・高HPへSpellbladeとHPを持つDSを優先候補。WRに存在しないRavenous Hydraの役割をそのままコピーせず、対タンク用のHP＋継続戦闘へ翻訳する。" },
+      "オーン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HPタンクなのでDSのHP・Spellblade・継続交換性能を優先候補。防具完成後も急所の確定ダメージと合わせてサイド圧を維持する。" },
+      "タム・ケンチ": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HP＋灰色体力へ長く触る必要があるためDSを優先候補。Ravenous HydraがWRにないため、HPとSpellbladeで役割を代替する。" },
+      "チョーガス": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "最大HPが伸びる相手へDSのHP＋Spellbladeを優先候補。急所の確定ダメージと合わせて長期戦の価値を上げる。" },
+      "ドクター・ムンド": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ロングソード", reason: "高HP・回復型なのでDSを候補にし、Ignite/回復阻害と合わせて長い交換を成立させる。" },
+      "ボリベア": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "ボリベアではDS固定よりTrinityを優先候補。AS・移動速度・SpellbladeでQ接近を避けながら再交換しやすくする。" },
+      "ケネン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "強いAPポーク対面ではHPを先に確保し、DSを完成させて接近後の交換を安定させる。" },
+      "ヴァルス": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "長射程ポークに対してRuby Crystalで序盤の体力余裕を作り、DSのHPを確保して接近戦へ翻訳する。" },
+      "ヴェイン": { item: "ディヴァイン サンダラー → トリニティ フォース", firstPurchase: "ルビークリスタル", reason: "DShield/Ruby系の耐久スタートを優先し、HPを持つDSでE後の再接近を安定させる。BORKを無条件の初手にはしない。" },
+      "クイン": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ルビークリスタル", reason: "射程差を詰める必要があるためTrinityの移動性能とSpellbladeを優先候補。Rubyで強いポークを受ける序盤を安定させる。" },
+      "ティーモ": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ルビークリスタル", reason: "接近性能と短い交換を優先し、Trinityの移動速度・Spellbladeを活かす。強いポークにはRubyを合わせる。" },
+      "ダリウス": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "長い追走を避けてQで内側へ入り直すため、Trinityの移動性能とSpellbladeを優先候補。TPでウェーブ管理を補う。" },
+      "トリンダメア": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "短い交換と再接近を繰り返し、Trinityで追撃性能を確保。R後の無敵時間を待ってから倒すためIgnite/TPを状況分岐する。" },
+      "レンガー": { item: "トリニティ フォース → ディヴァイン サンダラー", firstPurchase: "ロングソード", reason: "草むらからの接近を避けて再交換するためTrinityを優先候補。序盤の耐久より位置取りとQ移動を重視。" }
+    };
+
+    function getFioraFirstCore(enemyName) {
+      if (fioraFirstCore[enemyName]) return fioraFirstCore[enemyName];
+      const ranged = rangedEnemies.has(enemyName);
+      const item = ranged ? "ディヴァイン サンダラー → トリニティ フォース" : "トリニティ フォース → ディヴァイン サンダラー";
+      return {
+        item,
+        firstPurchase: ranged ? "ルビークリスタル" : "ロングソード",
+        reason: ranged
+          ? "強いポークにはRuby Crystalで序盤のHPを確保。WRにRavenous Hydraがないため、HPを持つDSまたは接近性能の高いTrinityへ役割を翻訳する。"
+          : "通常近接対面はLong Swordを基本。Ravenous HydraはWRに存在しないため、Trinityを一般的な継続戦闘・移動性能の候補、DSを高HP/タンク対策の候補として分岐する。"
+      };
+    }
+
+    
     function getChampionCoreText(champName, enemyName) {
       if (champName === 'エイトロックス') return getAatroxFirstCore(enemyName)?.item || '';
       if (champName === 'モルデカイザー') return getMordekaiserFirstCore(enemyName)?.item || '';
@@ -1798,16 +1841,72 @@ const renektonTips = {
       if (champName === 'グウェン') return getGwenFirstCore(enemyName)?.item || '';
       if (champName === 'ナー') return getGnarFirstCore(enemyName)?.item || '';
       if (champName === 'オーン') return getOrnnFirstCore(enemyName)?.item || '';
-      return '';
+      if (champName === 'フィオラ') return getFioraFirstCore(enemyName)?.item || '';
+      return ''; 
     }
 
     function getMatchupRuneSet(champName, enemyName, disposition) {
+      if (champName === 'フィオラ') {
+        const ranged = rangedEnemies.has(enemyName);
+        const poke = ['ヴァルス','ヴェイン','ケネン','クイン','ティーモ','カシオペア','ハイマーディンガー','ジェイス','オーロラ','ライズ','ブラッドミア','ナー','トリスターナ'].includes(enemyName);
+        const defensive = ['タム・ケンチ','ポッピー','レネクトン','ダリウス','トリンダメア','レンガー'].includes(enemyName);
+        const mainTree = '栄華';
+        const subTree = '不滅';
+        const keystone = (defensive && enemyName === 'タム・ケンチ') ? '不死者の握撃' : '征服者';
+        const main = [keystone, '背水の陣', 'レジェンド：迅速'];
+        const sub = (ranged || poke) ? '息継ぎ' : (['アンベッサ','セト','ダリウス','トリンダメア','レンガー','ボリベア'].includes(enemyName) ? 'ボーンアーマー' : '超成長');
+        const reason = (ranged || poke)
+          ? '遠隔・ポーク対面では征服者を維持しつつ、サブ不滅の息継ぎでレーンの消耗を補う。Ruby Crystal開始と組み合わせ、接近できる窓までHPを残す。'
+          : (disposition === 'disadvantage'
+            ? '不利対面でもFioraの勝ち筋はWで相手の決定的スキルを返して急所4つを完成させること。征服者で継続戦闘を伸ばし、対面の瞬間火力にはボーンアーマーを合わせる。'
+            : '近接対面は征服者＋不滅サブを基本。Qで急所を触って短く離脱し、再接近を繰り返すFioraの継続戦闘性能を優先する。');
+        return { runeText: `${keystone} / ${mainTree}: ${main.join(' / ')} / ${subTree}: ${sub}`, reason, structure: 'メイン栄華（3枠）＋サブ不滅（1枠）' };
+      }
+      /*
+function getMatchupRuneSet(champName, enemyName, disposition) {
       /*
        * Wild Rift 7.2d: Keystone + メイン3枠 + サブ1枠。
        * 方針：有利/五分は栄華メイン、不利は不滅メイン。
        * ルーン名・効果はWR 7.2系を基準にし、MOBAFireの対面別運用を考察して決定。
        */
-      const core = getChampionCoreText(champName, enemyName);
+
+      if (champName === 'フィオラ') {
+        const a = getFioraFirstCore(enemyName);
+        const runeSet = getMatchupRuneSet(champName, enemyName, disposition);
+        const spell = getChampionSpellTip(champName, enemyName) || '【サモナースペル】フラッシュ＋イグナイトを基本。';
+        const parts = a.item.split(' → ');
+        const raw = stripTipForDetail(customTips);
+        const ranged = rangedEnemies.has(enemyName);
+        let difficulty = 'Lv3〜4は相手の主要スキルが揃う時間帯なので、Wを先に使わず相手の勝ち筋を止める。Lv5以降はRの急所4つ完成を勝ち筋にし、1コア後はサイド圧を伸ばす。';
+        let enemyWin = 'Wを先に空振りさせ、こちらのQ移動とWがない時間に長い交換を作ること。';
+        let trade = 'Qで急所を取り、Wは相手の決定的なCC/火力へ残す。Q→AAを連打して長期戦に入る前に一度離れ、相手の主要スキル後に再接近する。';
+        if (raw) {
+          const first = raw.split(/。/).filter(Boolean).slice(0,2).join('。');
+          if (first) difficulty = first + '。';
+          enemyWin = raw;
+        }
+        if (['タム・ケンチ','ポッピー','レネクトン','ダリウス','ケネン','レンガー'].includes(enemyName)) {
+          difficulty = '序盤〜Lv4が最も危険。無理なQ接近を避け、Wを相手の決定的なCCへ残す。Lv5以降はRと急所の確定ダメージで逆転窓を作る。';
+        }
+        if (['オーン','チョーガス','ドクター・ムンド','サイオン','マルファイト'].includes(enemyName)) {
+          difficulty = 'Lv1〜4から急所でHP差を作り、Lv5以降はRでタンクのHP/防具差を確定ダメージへ変換する。ブランブル完成後は正面から殴り続けない。';
+        }
+        return {
+          recommendation: a.item,
+          rune: runeSet.runeText,
+          spell,
+          difficulty,
+          enemyWin,
+          trade,
+          firstComponent: a.firstPurchase,
+          firstCompleted: parts[0] || 'トリニティ フォース',
+          secondCore: parts.slice(1).join(' → ') || 'ディヴァイン サンダラー',
+          reason: a.reason,
+          source: 'MOBAFire現行Fiora Handbookを主資料。Ravenous HydraはPC側の標準役割を確認するために参照し、WRでは存在しないためDS/Trinity/Titanic Hydraへ役割を翻訳。WR側は現行アイテム存在・仕様確認に限定。'
+        };
+      }
+
+          const core = getChampionCoreText(champName, enemyName);
       const hasASCore = /黄昏と暁|実験的ヘクスプレート|ナッシャー/.test(core);
       const ranged = rangedEnemies.has(enemyName);
       const burst = burstEnemies.has(enemyName);
@@ -2363,6 +2462,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
         customTips = gnarTips[enemyName].replace(/\n/g, "<br>");
       } else if (myName === "オーン" && ornnTips[enemyName]) {
         customTips = ornnTips[enemyName].replace(/\n/g, "<br>");
+      } else if (myName === "フィオラ" && fioraTips[enemyName]) {
+        customTips = fioraTips[enemyName].replace(/\n/g, "<br>");
       }
 
       const mordekaiserCore = myName === "モルデカイザー" ? getMordekaiserFirstCore(enemyName) : null;
@@ -2463,13 +2564,67 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     // ===== 新しい対面データ層 =====
     // 既存の5チャンピオン分の個別Tipsを1つのデータ層へ統合。
     // 今後はここへ champion -> enemy のデータを追加するだけでUIが拡張される。
+
+    const fioraTips = {
+      "アーゴット": "【相性: 有利寄り】Eの接近とWの継続火力を見てからWで受け、Qで脚の急所を取りながら短く交換。Eを先に雑に使わせてからRの急所を進める。アーゴットEをWで返せると主導権を取りやすいが、Wのクールダウン中にE→W連打へ付き合わない。",
+      "アカリ": "【相性: 有利寄り】Lv1〜2はQで急所を触り、Wは煙幕中のQ/EやRの確定タイミングを意識して温存。煙幕内を無理に追わず、姿が出た瞬間だけ短く交換する。Lv5以降はRの急所完成を急ぎ、煙幕で時間を稼がれない。",
+      "アンベッサ": "【相性: 五分〜有利】Qの連続ダッシュに合わせてWを先置きしすぎず、最後のCC・火力スキルを見てからパリィ。アンベッサがスキルを使って接近した後にQで急所へ回り込み、長い追撃より急所4つの完成を優先。R取得後はお互いのオールイン性能が上がるため、Wを先に吐かない。",
+      "イラオイ": "【相性: 五分〜有利】Eを外した瞬間が最大の攻め時。Qで触手を避け、WはEやWの重要なCC・火力に合わせる。Lv5以降はRを先に使わせて一度離れ、触手のない位置から再接近する。R中に長く殴り続けない。",
+      "イレリア": "【相性: 有利寄り】序盤はパッシブスタックが揃う前にQで急所を触る。WはEのスタンかQ連打の重要局面に合わせ、スタック最大の正面殴り合いは避ける。Lv5以降はRを使われてもWで主要ダメージを受けられるなら再接近する。",
+      "ヴァルス": "【相性: 有利寄り】強いポークを無料で受け続けない。QでCSと急所を取り、RはWで受けるか横移動で避けて一気に接近。長射程相手なので序盤は無理に主導権を取りに行かず、ウェーブを利用して距離を詰める。",
+      "ヴェイン": "【相性: 五分】Dシールド＋息継ぎを基本候補。Eのノックバックを受ける前にQで間合いを詰め、WはEに合わせる。無料の3打目を許さず、Lv5以降はRでオールイン。壁際で追い込みすぎず、Eのクールダウン後に再接近する。",
+      "ウーコン": "【相性: 有利寄り】Wの分身でWを空振りさせられないよう、先にQで急所を取り短く離脱。ウーコンRはWで1回目のノックアップを受け、Rの回転中に無理に追わない。長期戦では急所とRの確定ダメージを活かす。",
+      "ウディア": "【相性: 有利寄り】Eの接近後にWを合わせ、Qで急所を取りながら短い交換を繰り返す。強化Wの回復・シールドを無視して長期戦にしない。徒歩接近をQの移動でかわし、スキルを吐かせてからRで追撃。",
+      "エイトロックス": "【相性: 有利】QのスイートスポットをQで外し、Wは3段目Qまたは引き寄せに合わせる。AatroxがEを攻めに使った後が大きな攻め時。Wを先に置いてQを止められると一気に有利を取れる。Lv5以降もQを受けてから殴り合うのではなく、Qを避けながら急所を進める。",
+      "オーロラ": "【相性: 有利寄り】遠距離ポークを無料で受けず、Qで急所を取りながらWで主要CCを返す。Rのゾーンに入る前に横へ抜け、閉じ込められた状態でWを空振りしない。Lv5以降はRを絡めた短いオールインを優先。",
+      "オーン": "【相性: 有利】Lv1〜2からQで急所を取り、W→AAで短く交換。オーンWやRの重要なCCをWで受け、RはできればWで返す。ブランブル・防具完成後は正面から長く殴らず、急所を取って離れる反復へ切り替える。",
+      "オラフ": "【相性: 有利寄り】Qで斧を避けながら急所を取り、WはEの接近や重要なE/AA交換に合わせる。オラフR中はCCを当てようとせず、急所とQ移動で時間を稼ぐ。R終了後に再度Wを残した状態で反撃する。",
+      "カ・サンテ": "【相性: 有利】Qでカ・サンテQを避け、Wは3段目QやWの重要な拘束に合わせる。Wを予測で先に吐かず、オールアウト中の低下した耐久を急所・Rで削る。壁際へ運ばれるRだけは最優先で警戒。",
+      "ガングプランク": "【相性: 有利寄り】Lv1〜2はQで樽を壊しながら急所を取る。WはQや樽起爆そのものより、近距離での重要なCC・スロー解除を意識。無料の樽ポークを許さず、樽のクールダウン後に短く詰める。",
+      "ガレン": "【相性: 有利】Qで急所を触って離脱し、Q→Eの接近をWで受ける。WをQのサイレンスに合わせると交換が安定。ガレンE中に正面で長くAAし続けず、回転が終わったところで再接近。Lv5以降はRで追撃を確定させる。",
+      "カミール": "【相性: 有利】Lv1からQで急所を取り、WはEのフックショットやQ2の重要AAに合わせる。Eを温存してカミールEを避け、Eが外れた後にQで再接近。Rを先に使ってEで逃げる展開を許さない。",
+      "カシオペア": "【相性: 不利寄り】毒を無料で受けず、QでCSと急所を取りながら接近。WはRの石化方向を見て返し、W中にE連打を受けない。強いポークを受けるレーンではDシールド＋息継ぎ、無理な長追いは避ける。",
+      "クレッド": "【相性: 有利】Lv2から主導権を取りやすい。WはKledのW4連撃の重要タイミングかRに合わせ、騎乗中に無理な長期戦をしない。非騎乗になった瞬間に急所を進め、再騎乗前に倒し切る。",
+      "グウェン": "【相性: 五分】Lv1〜4はQで急所を触り、WはQ4やRの重要なダメージに合わせる。長期戦ではグウェンのQスタックを見てから接近し、R3発目まで無条件に付き合わない。Lv5以降は急所4つを完成させる速度が重要。",
+      "クイン": "【相性: やや有利】Dシールドを候補にし、Lv3までは無理に追わずウェーブを受ける。EのノックバックをWで返すか、QでEの射線から外れて接近。Lv5以降はRで捕まえやすくなるので、クインのW位置とロームを意識する。",
+      "グラガス": "【相性: 有利寄り】Qで急所を取り、WはEボディスラムかRの重要なノックバックに合わせる。パッシブ回復後に長期戦を作らず、Eを空振りさせてから再接近。Rで分断されたら急所を取り直して無理に追わない。",
+      "ケイル": "【相性: 有利】Lv1〜4で圧力をかけ、QでCSを妨害しながら急所を取る。WはQスローやRの無敵後ではなく、捕まえるための主要タイミングに残す。自由にファームさせず、Lv5以降もウェーブ管理でスケールを遅らせる。",
+      "ケネン": "【相性: 不利】Dシールド＋息継ぎを基本。Qポークを無料で受けず、スタック2まで進んだらWでW/RのCCを受ける。遠距離から削られた状態でオールインせず、ウェーブが崩れた後に短く接近する。QSSは集団戦で重要。",
+      "サイオン": "【相性: 有利】Qで急所を取り、WはQ溜めやRに合わせる。Wシールドを見てから長期戦に入り、最大HPが伸びても急所＋Rで削る。復活後のAAを無理に追わず、ウェーブとタワー圧を優先。",
+      "セト": "【相性: 五分〜不利寄り】Lv1の正面殴り合いは避け、WはEスタンかWの真ん中を狙う。QでW中心を避け、シールドを削った後に再接近。セトRをWで受けられるなら反撃するが、Wを先に使ってR→Wへ繋がる展開は避ける。",
+      "タム・ケンチ": "【相性: 不利寄り】序盤の正面戦闘はかなり危険。Qを避け、Wは最終パッシブAAや重要なQ/CCに合わせる。Lv5以降＋1コアで急所とRの確定ダメージを使い、E灰色体力を無視して削る。序盤のデスを絶対に避ける。",
+      "ダリウス": "【相性: 不利寄り】長い交換を避け、Q内側へ入って外側Q回復を許さない。WはE引き寄せやRに合わせる。Lv4までのダリウスの主導権を尊重し、R取得後は急所完成とWでオールインを返す。TPを選び、レーン復帰とウェーブ管理を優先する候補。",
+      "チョーガス": "【相性: 有利】Lv1〜2からQで急所を触る。沈黙を先に受けるとWを使えないため、Q→Wの順番を固定しすぎない。WはRや沈黙に合わせ、HPスタックが増えても急所とRで削り切る。",
+      "ティーモ": "【相性: 有利】Dシールドを基本にLv3まで無理せず、Qでブラインドを避けるかWで受けてから接近。ブラインド中にAAを連打せず、効果終了後に急所をまとめて取る。Lv5以降はRで捕まえやすくなる。",
+      "ドクター・ムンド": "【相性: 有利】Qで包丁を避け、パッシブを無理に追わずCS差を作る。回復量が高いためIgniteを基本候補にし、R中の回復を重ねて許さない。長期戦でRを先に使わせ、急所4つを完成させる。",
+      "トリンダメア": "【相性: 五分〜不利】フル怒り時の長期戦を避け、WはEスピンかRに合わせる。Rを先に使ってからトリンダメアR中の無敵を待ち、終了直後にW/急所で倒し切る。Igniteも候補だがTPでレーン管理を優先する選択が安定。",
+      "ナサス": "【相性: 有利寄り】序盤からQでCSを妨害し、ウェーブを固定してスタックを許さない。WはQのスローやR開始直後の重要タイミングに合わせる。ナサスR中は正面から長く戦わず、Rが切れるまで距離を置いて再接近する。",
+      "ナー": "【相性: 有利寄り】遠距離形態では無料のQポークを受けず、Lv2〜3まではウェーブを利用して接近。WはメガW/Rに合わせる。Eのジャンプを一度使わせてから再接近し、メガ中のCCをWで受けられると有利を現金化できる。",
+      "ハイマーディンガー": "【相性: 五分〜不利寄り】タレットをQで処理し、EスタンをWで返す。Rタレットに正面から入らず、タレット数を減らしてから接近。強いゾーン戦なので一度に全てのタレットを処理しようとせず、ウェーブを使って位置をずらす。",
+      "ポッピー": "【相性: 不利】W発動中にQで飛び込まない。Eを壁際で使わせてWで返し、Wが切れた後にQ→Wで交換する。ブランブル＋スチールキャップ完成後は正面長期戦を避け、急所を取りながらウェーブ管理へ切り替える。",
+      "ボリベア": "【相性: 五分〜不利寄り】Lv1の正面殴り合いを甘く見ない。WはEシールドやQ接近に合わせ、W2回目の噛みつき回復を許さない。1コアはディヴァイン サンダラーよりトリニティ フォースを優先候補とし、Qで短く離脱して再交換する。",
+      "リヴェン": "【相性: 五分】Lv1はQで急所を触り、Wは3段目QやWスタンに合わせる。Wがない時間は長く交換しない。R込みのコンボはWを残して受け、Qで追撃位置を調整する。",
+      "レンガー": "【相性: 不利寄り】草むらからの強襲を常に警戒し、Qで急所を取りながら茂みの外へ誘導。WはEの拘束や強化Qの重要タイミングに合わせる。序盤はウェーブ中央で戦わず、ジャンプ先を限定する。",
+      "ワーウィック": "【相性: 有利寄り】序盤はQ・AAの火力と回復を甘く見ず、WはE恐怖やRに合わせる。Rに対してEかWを適切に残し、長期戦では回復阻害を確保。グラスプも候補だが、基本は征服者で継続戦闘を優先。",
+      "ヨリック": "【相性: 有利寄り】Lv1からQで急所を取り、Eを避けてからWを置く。Wの壁をQで抜け、Eを外したヨリックへ再接近。Lv5以降はRのグール回復を許さず、必要なら回復阻害を購入。",
+      "ヨネ": "【相性: 有利寄り】Q3やE復帰のタイミングにWを合わせ、Qで急所を取りながら短く交換。E中の追いすぎを避け、復帰位置を読んで再接近する。RはWで受けられるなら反撃窓に変える。",
+      "ライズ": "【相性: 有利寄り】Lv2から圧力をかけ、Qで急所を取りながら接近。フェイズラッシュで逃げられるためWを先置きせず、スネアをWで受けてからQで再接近。自由にウェーブを処理させない。",
+      "ランブル": "【相性: 有利寄り】ヒートが高い時間を避け、EのハープーンやQの火炎が切れた瞬間に短く入る。WはEスローやRではなく、重要なCC・キルコンボを見て使う。Rの範囲内に居座らず、短い交換を反復。",
+      "レック＝サイ": "【相性: 有利寄り】地下Wからのノックアップを横移動で避け、Qで急所を取りながら短く交換。Wは予測で先置きせず、Eノックアップや重要なCCに合わせる。地下を追い回さず、出てきた瞬間を狙う。",
+      "レネクトン": "【相性: 不利】怒り50以上の強化Wを最警戒。Wは強化WかE接近に合わせ、Qで急所を取ってすぐ離れる。レネクトンにレーン主導権を渡した状態で正面から長く戦わず、ウェーブを利用してLv5以降のRオールインへ繋げる。",
+      "ザック": "【相性: 有利寄り】EジャンプをWで受け、Qで急所を取りながら短く交換。分裂後のスライム回収を許さず、Rで回復を無視して倒し切る。回復が大きいためIgniteを候補にする。",
+      "スカーナー": "【相性: 有利】E/CCの接近をWで受け、Qで急所を取りながら離脱。Rで引かれる前にWを温存し、キャッチされた場合も主要CCを返して時間を稼ぐ。タンク性能は急所で無視してサイド圧を取る。",
+      "シェン": "【相性: 有利】Qで急所を取り、WはE挑発やAA強化に合わせる。シェンRで離脱したら即座にウェーブを押してプレートを取る。無理にキルを追うより、Rの不在時間をタワー差へ変換する。"
+    };
+    
     const matchupResearch = {
       "エイトロックス": aatroxTips,
       "モルデカイザー": mordekaiserTips,
       "レネクトン": renektonTips,
       "グウェン": gwenTips,
       "ナー": gnarTips,
-      "オーン": ornnTips
+      "オーン": ornnTips,
+      "フィオラ": fioraTips
     };
 
     // 既存資料に未記載だった対面。断定せず「要追加検証」として表示する。
@@ -2483,7 +2638,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       "レネクトン": "WR Master+公式統計を確認。個別対面は現行WR資料と既存考察を照合し、PC版高レート記事をWR勝率の根拠にはしない。",
       "グウェン": "WR Master+公式統計を確認。現行ビルドはWR資料を優先し、個別対面は既存考察を補助資料として扱う。",
       "ナー": "WR現行ビルド資料を優先。個別対面の高レート記事が確認できない場合は考察扱い。",
-      "オーン": "WR Master+公式統計・現行WRビルド資料を優先。PC版MOBAFireのMaster表記はWR資料として採用しない。"
+      "オーン": "WR Master+公式統計・現行WRビルド資料を優先。PC版MOBAFireのMaster表記はWR資料として採用しない。",
+      "フィオラ": "MOBAFire現行Fiora Handbook（Patch 26.17）を主資料。PCの対面評価・立ち回り・スペル傾向を優先し、WRはアイテム存在/仕様と現行環境確認に限定。Ravenous HydraはWRにないため、DS/Trinity/Titanic Hydraへ役割を翻訳。"
     };
 
     const currentWrGlobalStats = {
@@ -2499,7 +2655,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       return (s || '').toLowerCase().trim().replace(/[\s　]/g,'');
     }
 
-    // MATCHUPモードで「自分」に選択できる、現時点で対面研究済みの6体。
+    // MATCHUPモードで「自分」に選択できる、現時点で対面研究済みの7体。
     // 「対面」は従来どおり全チャンピオンを選択可能。
     const researchedMyChampions = new Set([
       "エイトロックス",
@@ -2620,6 +2776,11 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
         const arr = a.item.split(' → ');
         return { firstPurchase:a.firstPurchase || 'AD素材を優先。対面に応じてブーツ/防具/回復阻害へ分岐', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:a.reason };
       }
+      if (champName === 'フィオラ') {
+        const a = getFioraFirstCore(enemyName);
+        const arr = a.item.split(' → ');
+        return { firstPurchase:a.firstPurchase, firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:a.reason };
+      }
       if (champName === 'ナー' && gnarFirstCore[enemyName]) {
         const arr = gnarFirstCore[enemyName].item.split(' → ');
         return { firstPurchase:'対面指定あり', firstCore:arr[0], secondCore:arr.slice(1).join(' → ') || '状況分岐', reason:gnarFirstCore[enemyName].reason };
@@ -2645,6 +2806,9 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       if (champName === 'グウェン' && enemyName === 'フィオラ') return 'フィオラWを確認せずにQ中心部やRの重要弾を先出ししない。';
       if (disposition === 'extreme') return '相手の勝ち筋が完成した状態で正面オールインしない。CS・経験値・ウェーブ状態を優先する。';
       if (disposition === 'disadvantage') return '相手の主要スキルが残っている状態で先に全リソースを吐かない。長追いしない。';
+      if (champName === 'フィオラ' && ['タム・ケンチ','ポッピー','レネクトン','ダリウス','ケネン','レンガー'].includes(enemyName)) return 'Wを先に空振りしない。相手の決定的なCC/火力を受けるまでWを残し、Qの追撃だけで長追いしない。';
+      if (champName === 'フィオラ' && enemyName === 'トリンダメア') return 'トリンダメアR中にこちらのRを先に消費して無理に倒そうとしない。無敵終了後のキルラインへWとIgniteを残す。';
+      if (champName === 'フィオラ' && enemyName === 'ボリベア') return 'ボリベアW2回目の回復・ダメージを許す長期戦をしない。Qで一度離れて再接近する。';
       if (disposition === 'advantage') return '有利だからといって相手タワー下まで深追いし、離脱手段を失わない。';
       return '主要スキルのクールダウンを確認せず、こちらの離脱手段まで使い切った長期戦に入らない。';
     }
