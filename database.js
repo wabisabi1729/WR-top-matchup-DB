@@ -4496,16 +4496,26 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       );
     }
 
+    // WR未実装チャンピオンのPC研究専用。正式WRロスター(matchups)には含めない。
+    const researchOnlyMatchups = [
+      {
+        id: "Anivia", name: "アニビア", kana: "あにびあ", types: ["PC研究のみ"],
+        unfavorable: "", tips: "【PC研究のみ】Wild Rift未実装。アンベッサ vs アニビアはPC版の対面研究データを表示。WR正式対面としては扱わない。"
+      }
+    ];
+
     function findChampion(query) {
       const q = normalizeSearch(query);
       if (!q) return null;
-      return matchups.find(c => normalizeSearch(c.name) === q || normalizeSearch(c.kana) === q) ||
-        matchups.find(c => normalizeSearch(c.name).includes(q) || normalizeSearch(c.kana).includes(q));
+      const pool = matchups.concat(researchOnlyMatchups);
+      return pool.find(c => normalizeSearch(c.name) === q || normalizeSearch(c.kana) === q) ||
+        pool.find(c => normalizeSearch(c.name).includes(q) || normalizeSearch(c.kana).includes(q));
     }
     function getSuggestions(query) {
       const q = normalizeSearch(query);
-      if (!q) return matchups.slice();
-      return matchups.filter(c => normalizeSearch(c.name).includes(q) || normalizeSearch(c.kana).includes(q)).slice(0, 12);
+      const pool = matchups.concat(researchOnlyMatchups);
+      if (!q) return pool.slice();
+      return pool.filter(c => normalizeSearch(c.name).includes(q) || normalizeSearch(c.kana).includes(q)).slice(0, 12);
     }
     function showSuggestions(inputId, boxId, items) {
       const box = document.getElementById(boxId);
