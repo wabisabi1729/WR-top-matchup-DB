@@ -2059,18 +2059,9 @@ const renektonTips = {
         return '【サモナースペル】フラッシュ＋イグナイトを基本。現行PCのTop統計でもIgniteが明確な標準で、MOBAFire高レート資料でもレーン主導権とキル圧を重視する。Quinn等の明確な例外だけTeleportへ分岐する。';
       }
       if (champName === 'エイトロックス') {
-        // エイトロックスは現行WRでFlash + Igniteが明確な標準。
-        // PC側の高レート資料でもIgniteのレーン圧を重視する傾向が確認できるため、
-        // 旧DBの「不利対面＝TP」という一括判定は廃止する。
-        // TPは明確な例外理由がある対面だけに限定する。
-        if (enemyName === 'フィオラ') {
-          return '【サモナースペル】フラッシュ＋テレポート。TP例外として確定。MOBAFireではAatrox側の非常に難しい対面として扱われ、Q/WをRiposteで止められるため無理なオールインを避け、レーン復帰・ウェーブ維持を優先する考え方が確認できる。OnetricksでもAatrox OTP側の対面データが大きく有利とは言えず、WR側でもFioraはAatroxの主要カウンター。';
-        }
-        // 再監査済み：TP例外として根拠が十分なのはフィオラのみ。
-        // オーン/サイオン/シェン/スカーナー/タム・ケンチ/ザーヘンは、
-        // MOBAFire・Onetricks・WR資料を突き合わせた結果、Aatrox側の標準Igniteを崩すほどの
-        // 対面固有TP根拠が確認できないため、Igniteへ戻す。
-        return '【サモナースペル】フラッシュ＋イグナイトを基本。Qの交換からキルラインを作り、オールインの確定力と回復阻害を優先する。テレポートは明確なマクロ上の理由がある場合だけ選択。';
+        const tp = new Set(['フィオラ','イレリア','リヴェン','ダリウス','ドクター・ムンド','ヴェイン','クイン','ケネン','ティーモ','ジェイス','ヴァルス','カシオペア','ハイマーディンガー','ナー','ケイル','ライズ','ブラッドミア','トリスターナ','ツイステッド・フェイト','シンジド']);
+        if (tp.has(enemyName)) return '【サモナースペル】フラッシュ＋テレポート。レーン復帰・ウェーブ維持・マクロ価値を優先する対面。特にレンジ/ポークや長い交換を強制される対面ではIgniteより再試行回数を確保する。';
+        return '【サモナースペル】フラッシュ＋イグナイト。短いQ交換からキルラインを作り、回復阻害と確定力を優先する。';
       }
       if (champName === 'グウェン') {
         // グウェンはWR現行Diamond+でFlash + Igniteが明確な標準。
@@ -2234,7 +2225,34 @@ const renektonTips = {
     };
     // 重複キーを避けるため、上記の意図を維持して最終定義を上書き
     aatroxFirstCore["フィオラ"] = { item: "赤月の刃 → サンダード スカイ", firstPurchase: "エクスキューショナー系を優先候補", reason: "MOBAFireではフィオラに対して回復阻害の早期購入が強く推奨される。完成コアは赤月の刃を主軸にしてQ/Eの短い接触で圧力を作り、次にサンダード スカイで1回目のAAと回復効率を補う。DSはフィオラ単体の対面では優先度を上げない。" };
-    function getAatroxFirstCore(enemyName) { return aatroxFirstCore[enemyName] || aatroxFirstCore.default; }
+    // エイトロックス：対面別のビルド分岐をUIから確実に参照させるための現行WR翻訳層。
+    // 既存の明記済み高レート対面はそのまま維持し、未明記対面は「相手の勝ち筋」に合わせて分岐。
+    const aatroxDynamicBuild = {
+      ranged: new Set(['ヴァルス','ヴェイン','クイン','ケネン','ティーモ','ジェイス','カシオペア','ハイマーディンガー','ナー','トリスターナ','ツイステッド・フェイト','ブラッドミア','ケイル','ライズ','オーロラ']),
+      tanks: new Set(['オーン','サイオン','シオン','チョーガス','ドクター・ムンド','マルファイト','タム・ケンチ','シェン','マオカイ','ザック','スカーナー','カ・サンテ']),
+      aaDuelers: new Set(['イレリア','ジャックス','リヴェン','トリンダメア','フィオラ','ウディア','ボリベア','ぼりべあ','ヨネ','ヤスオ','レンガー','ウーコン']),
+      apBurst: new Set(['アカリ','グウェン','カシオペア','ケネン','オーロラ','ランブル','ブラッドミア','シラス','スウェイン','ルブラン']),
+      antiHeal: new Set(['フィオラ','グウェン','イラオイ','ドクター・ムンド','ワーウィック','ボリベア','ナサス'])
+    };
+    const aatroxDynamicReason = {
+      ranged: '遠距離から削られる対面。ストライドブレイカーで接近手段を作り、サイドで一度捕まえた後の継続交換へ繋げる。',
+      tanks: '高HP・防具対面。ブラック クリーバーで防御を崩し、ディヴァイン サンダラーを2手目にして高HPへの継続交換を強化する。',
+      aaDuelers: 'AA・接近依存のデュエラー。赤月の刃で短いQ/E接触を強化し、2手目はデス ダンスで物理継続戦闘への耐久を足す。',
+      apBurst: 'AP/CCバースト対面。赤月の刃で短い接触を作り、2手目はマルモティウスの胃袋で魔法バーストへの耐性を確保する。',
+      antiHeal: '回復量が勝敗を分ける対面。完成コアを急ぐ前に回復阻害を早め、赤月の刃を軸に短い交換を重ねる。'
+    };
+    function getAatroxDynamicCore(enemyName) {
+      if (aatroxFirstCore[enemyName] && enemyName !== 'default') return aatroxFirstCore[enemyName];
+      if (aatroxDynamicBuild.tanks.has(enemyName)) return { item:'ブラック クリーバー → ディヴァイン サンダラー', firstPurchase:'ロングソード', reason:aatroxDynamicReason.tanks };
+      if (aatroxDynamicBuild.ranged.has(enemyName)) return { item:'ストライドブレイカー → サンダード スカイ', firstPurchase:'ルビークリスタル', reason:aatroxDynamicReason.ranged };
+      if (aatroxDynamicBuild.apBurst.has(enemyName)) return { item:'赤月の刃 → マルモティウスの胃袋', firstPurchase:'ロングソード', reason:aatroxDynamicReason.apBurst };
+      if (aatroxDynamicBuild.aaDuelers.has(enemyName)) return { item:'赤月の刃 → デス ダンス', firstPurchase:'ロングソード', reason:aatroxDynamicReason.aaDuelers };
+      if (aatroxDynamicBuild.antiHeal.has(enemyName)) return { item:'赤月の刃 → サンダード スカイ', firstPurchase:'ロングソード', reason:aatroxDynamicReason.antiHeal };
+      return { item:'赤月の刃 → サンダード スカイ', firstPurchase:'ロングソード', reason:'標準のファイター対面。赤月の刃でQ/Eの短い接触を強化し、2手目はサンダード スカイでHPと初回AAの価値を伸ばす。' };
+    }
+    aatroxFirstCore.default = aatroxFirstCore.default;
+
+    function getAatroxFirstCore(enemyName) { return getAatroxDynamicCore(enemyName); }
 
     
     const fioraFirstCore = {
@@ -2318,6 +2336,29 @@ const renektonTips = {
     }
 
     function getMatchupRuneSet(champName, enemyName, disposition) {
+      if (champName === 'グウェン') {
+        const rangedPoke = new Set(['ヴァルス','ヴェイン','クイン','ケネン','ティーモ','ジェイス','ナー','ガングプランク','カシオペア','ハイマーディンガー','ライズ','ブラッドミア','ケイル','トリスターナ','オーロラ']);
+        const hardCC = new Set(['ダリウス','レネクトン','ジャックス','リヴェン','イレリア','パンテオン','セト','ポッピー','ガレン','トリンダメア','ウディア','ボリベア']);
+        const earlyTrade = new Set(['オーン','サイオン','チョーガス','マオカイ','ザック','ヨリック','ナサス','モルデカイザー']);
+        let keystone='征服者', main=['征服者','凱旋','レジェンド：迅速'], subTree='不滅', sub='超成長', reason='標準は征服者＋不滅サブ。Q4とEを絡めた短～中時間の交換を継続戦闘へ繋げる。';
+        if (rangedPoke.has(enemyName)) {
+          sub='息継ぎ';
+          reason='遠距離・ポーク対面。Dシールド相当のルビクリ開始と合わせ、息継ぎでレーン消耗を補い、接近できる窓までHPを残す。';
+        } else if (hardCC.has(enemyName)) {
+          sub='忍耐';
+          reason='CCが勝敗を決める対面。レジェンド：迅速を維持しつつ忍耐を合わせ、接近後のCC連鎖で一方的に失う時間を減らす。';
+        } else if (earlyTrade.has(enemyName)) {
+          sub='ボーンアーマー';
+          reason='序盤の短いバースト交換が重要。ボーンアーマーで最初の交換を受け、Q4＋Eの反撃を通す。';
+        } else if (['アカリ','グウェン','ランブル','オラフ'].includes(enemyName)) {
+          sub='生気付与';
+          reason='継続戦闘で回復・シールドの価値が高い対面。生気付与でパッシブ回復と防御リソースの効率を上げる。';
+        } else if (disposition==='disadvantage') {
+          sub='ボーンアーマー';
+          reason='不利対面では最初の交換を耐え、Q4＋Eの反撃窓を作るためボーンアーマーを優先。';
+        }
+        return { runeText:`${keystone} / 栄華: ${main.slice(1).join(' / ')} / ${subTree}: ${sub}`, reason, structure:'メイン栄華（3枠）＋サブ不滅（1枠）' };
+      }
       if (champName === 'フィオラ') {
         const ranged = rangedEnemies.has(enemyName);
         const poke = ['ヴァルス','ヴェイン','ケネン','クイン','ティーモ','カシオペア','ハイマーディンガー','ジェイス','オーロラ','ライズ','ブラッドミア','ナー','トリスターナ'].includes(enemyName);
