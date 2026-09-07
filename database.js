@@ -2335,12 +2335,26 @@ const renektonTips = {
       return ''; 
     }
 
+    function getPrecisionFirstRune(champName, enemyName) {
+      // 栄華1枠：ブルータル＝序盤のAA/短時間交換、バトルジール＝通常スキル主体の継続戦闘。
+      // 対面ごとに明示的に分岐し、チャンピオン単位の固定値にはしない。
+      const battleZeal = {
+        'エイトロックス': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','マオカイ','ザック','スカーナー','ガレン','ダリウス','イラオイ','モルデカイザー','セト','ウディア','ボリベア','レンガー']),
+        'レネクトン': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','スカーナー','モルデカイザー','ガレン','セト','ダリウス','イラオイ','ボリベア','ウディア']),
+        'グウェン': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','モルデカイザー','ダリウス','イラオイ','セト','ボリベア','ウディア','ザック','スカーナー','ガレン','ヨリック','ナサス','ナー','グラガス','オラフ','リヴェン','イレリア','ジャックス','カミール','フィオラ','レネクトン']),
+        'ナー': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','モルデカイザー','ダリウス','イラオイ','セト','ガレン','スカーナー','ナサス','ヨリック','ウディア','ボリベア','オラフ','トランドル','トリンダメア']),
+        'モルデカイザー': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','マオカイ','ザック','スカーナー','ガレン','ダリウス','イラオイ','セト','ボリベア','ウディア','オラフ','トランドル','トリンダメア','ヨリック','ナー','グラガス','レネクトン','フィオラ','ジャックス','カミール','リヴェン']),
+        'フィオラ': new Set(['オーン','サイオン','チョーガス','タム・ケンチ','ドクター・ムンド','マルファイト','ポッピー','マオカイ','ザック','スカーナー','ガレン','ダリウス','イラオイ','モルデカイザー','セト','ウディア','ボリベア','ヨリック','ナー','グラガス','レネクトン','ジャックス','カミール','リヴェン','クレッド','ウーコン']),
+      };
+      return battleZeal[champName]?.has(enemyName) ? 'バトルジール' : 'ブルータル';
+    }
+
     function getMatchupRuneSet(champName, enemyName, disposition) {
       if (champName === 'グウェン') {
         const rangedPoke = new Set(['ヴァルス','ヴェイン','クイン','ケネン','ティーモ','ジェイス','ナー','ガングプランク','カシオペア','ハイマーディンガー','ライズ','ブラッドミア','ケイル','トリスターナ','オーロラ']);
         const hardCC = new Set(['ダリウス','レネクトン','ジャックス','リヴェン','イレリア','パンテオン','セト','ポッピー','ガレン','トリンダメア','ウディア','ボリベア']);
         const earlyTrade = new Set(['オーン','サイオン','チョーガス','マオカイ','ザック','ヨリック','ナサス','モルデカイザー']);
-        let keystone='征服者', main=['征服者','凱旋','レジェンド：迅速'], subTree='不滅', sub='超成長', reason='標準は征服者＋不滅サブ。Q4とEを絡めた短～中時間の交換を継続戦闘へ繋げる。';
+        let keystone='征服者', main=[getPrecisionFirstRune(champName, enemyName),'凱旋','レジェンド：迅速'], subTree='不滅', sub='超成長', reason='標準は征服者＋栄華。栄華1は対面の戦闘時間と通常攻撃依存度に応じてブルータル／バトルジールを選択する。';
         if (rangedPoke.has(enemyName)) {
           sub='息継ぎ';
           reason='遠距離・ポーク対面。Dシールド相当のルビクリ開始と合わせ、息継ぎでレーン消耗を補い、接近できる窓までHPを残す。';
@@ -2366,7 +2380,7 @@ const renektonTips = {
         const mainTree = '栄華';
         const subTree = '不滅';
         const keystone = (defensive && enemyName === 'タム・ケンチ') ? '不死者の握撃' : '征服者';
-        const main = [keystone, '背水の陣', 'レジェンド：迅速'];
+        const main = [getPrecisionFirstRune(champName, enemyName), '背水の陣', 'レジェンド：迅速'];
         const sub = (ranged || poke) ? '息継ぎ' : (['アンベッサ','セト','ダリウス','トリンダメア','レンガー','ボリベア'].includes(enemyName) ? 'ボーンアーマー' : '超成長');
         const reason = (ranged || poke)
           ? '遠隔・ポーク対面では征服者を維持しつつ、サブ不滅の息継ぎでレーンの消耗を補う。Ruby Crystal開始と組み合わせ、接近できる窓までHPを残す。'
@@ -2464,11 +2478,11 @@ function getMatchupRuneSet(champName, enemyName, disposition) {
         if (disposition === 'disadvantage' || disposition === 'extreme') {
           mainTree = '不滅'; subTree = '栄華';
           main = ['堅忍不抜', ranged ? '息継ぎ' : 'ボーンアーマー', cc ? '忍耐' : '超成長'];
-          sub = 'ブルータル';
-          reason = '不利対面では不滅3枠でレーンを安定させ、サブ栄華で最低限の交換火力を確保する。征服者は固定。';
+          sub = getPrecisionFirstRune(champName, enemyName);
+          reason = '不利対面では不滅3枠でレーンを安定させ、サブ栄華1枠は対面に応じてブルータル／バトルジールを選択する。';
         } else {
           mainTree = '栄華'; subTree = '不滅';
-          main = ['征服者','背水の陣', cc ? 'レジェンド：強靭' : 'レジェンド：迅速'];
+          main = [getPrecisionFirstRune(champName, enemyName), '背水の陣', cc ? 'レジェンド：強靭' : 'レジェンド：迅速'];
           sub = burst ? 'ボーンアーマー' : (ranged ? '息継ぎ' : '超成長');
           reason = '有利・五分対面では征服者でQ連続ヒットから長期戦の火力を伸ばし、サブ不滅で対面別の耐久を確保する。';
         }
@@ -2498,24 +2512,7 @@ function getMatchupRuneSet(champName, enemyName, disposition) {
         subTree = '不滅';
 
         // 栄華1：通常攻撃依存度と継続戦闘の長さを優先して決定。
-        let p1;
-        if (champName === 'レネクトン') {
-          p1 = (renektonAudit[enemyName]?.keystone === 'フリートフットワーク')
-            ? 'ブルータル'
-            : (renektonAudit[enemyName]?.keystone === 'エンパワーメント' ? 'エンパワーメント' : 'ブルータル');
-        } else if (champName === 'グウェン') {
-          p1 = 'ブルータル';
-        } else if (champName === 'ナー') {
-          p1 = 'ブルータル';
-        } else if (champName === 'モルデカイザー') {
-          // モルデカイザーのキーストーンは征服者で固定。
-          // ただし栄華1段目はアイテム構成で分岐する。
-          // AS/通常攻撃・オンヒット寄りの構成ではブルータル、
-          // AP/スキル持続火力寄りの構成ではバトルジールを優先。
-          p1 = hasASCore ? 'ブルータル' : 'バトルジール';
-        } else {
-          p1 = 'ブルータル';
-        }
+        const p1 = getPrecisionFirstRune(champName, enemyName);
 
         // 栄華2：ファイターは接近して殴り合う時間が長く、低体力まで戦う場面が多いので背水の陣を基本。
         // 栄華3：レジェンドは通常は迅速。CCが強い対面ではレジェンド：強靭を優先。
@@ -2578,11 +2575,7 @@ function getMatchupRuneSet(champName, enemyName, disposition) {
         main = [r1, r2, r3];
 
         // サブ栄華：チャンピオンごとの継続戦闘特性を残す。
-        if (champName === 'レネクトン') sub = 'ブルータル';
-        else if (champName === 'グウェン') sub = 'ブルータル';
-        else if (champName === 'ナー') sub = 'ブルータル';
-        else if (hasASCore) sub = 'ブルータル';
-        else sub = 'バトルジール';
+        sub = getPrecisionFirstRune(champName, enemyName);
 
         if (champName === 'オーン') {
           subTree = '魔道';
