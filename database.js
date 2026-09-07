@@ -2694,6 +2694,25 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     }
 
     const ambessaMatchupDetails = {
+  "アニビア": {
+    "disposition": "advantage",
+    "recommendation": "赤月の刃 → スピア オブ ショージン",
+    "rune": "征服者",
+    "spell": "フラッシュ＋テレポート",
+    "difficulty": "PC版基準。Lv1〜4はAniviaのQ/EとWの地形分断で接近経路を失わないこと。Lv5以降はR取得後のゾーニングを短いダッシュ交換で崩す。",
+    "enemyWin": "Qで接近を止め、Wで進路を切り、R＋Eで継続的にゾーンを作ってCSと経験値差を広げる。特にAmbessaのE後の再接近をWで分断する。",
+    "trade": "Anivia Qを見てから短く接近し、Q/Eを外させた窓でQ1/Q2→Eを入れる。Wで進路を切られた場合はPassiveダッシュを一度残し、壁際で全リソースを使わない。",
+    "firstComponent": "ロングソード",
+    "firstCompleted": "赤月の刃",
+    "secondCore": "スピア オブ ショージン",
+    "boots": "マーキュリートレッド",
+    "reason": "PC版OnetricksではAmbessa側54.5%・88試合、15分時点Gold +324、Mobalyticsの別集計ではAmbessa 60.0%・15試合で、サンプル差はあるもののAmbessa側有利を示す。AniviaはQ/W/Rで接近を分断できる一方、Ambessaは複数回の短いダッシュでQ/Eを避けながら接近できるため、単純な遠距離有利ではない。",
+    "itemAnalysis": "【赤月の刃】短時間の接触を強化するADファイター向け1コア。 【スピア オブ ショージン】スキル回転を高め、Aniviaのゾーニングを抜けた後に再接近する回数を増やす。 【マーキュリートレッド】PC基準ではAniviaの魔法ダメージとCCへの回答。ただしWRではAnivia未実装のため、WR正式ビルドとしては未確定。",
+    "neverDo": "AniviaのQ/Wが残っている状態で全ダッシュを一度に使い切らない。Wの壁で退路を切られたままRまで重ねて長時間ゾーン内に残らない。",
+    "source": "PC研究のみ。Onetricks.gg Ambessa vs Anivia（88試合、Ambessa OTP 54.5%、15分Gold +324）を主な実戦データ、Mobalytics Anivia vs Ambessa（Patch 26.16、15試合、Ambessa 60.0%、GD@15 +360）を補助。AniviaはWild Rift未実装のためWR正式対面ではなくPC研究用。",
+    "confidence": "★★★☆☆"
+  },
+  
   "ポッピー": {
     "disposition": "even",
     "recommendation": "赤月の刃 → スピア オブ ショージン",
