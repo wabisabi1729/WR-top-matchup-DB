@@ -3924,13 +3924,36 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     const ambessaDispositionLabel = { advantage: "有利", even: "五分", disadvantage: "不利", extreme: "極めて不利" };
     const ambessaTips = Object.fromEntries(Object.entries(ambessaMatchupDetails).map(([enemy, d]) => [enemy, `【相性: ${ambessaDispositionLabel[d.disposition] || "要追加検証"}】${d.trade} ${d.difficulty}`]));
 
+    function getAmbessaRuneDisplay(enemyName, rawRune) {
+      // 研究メモに keystone だけが残っている対面は、WR 7.2d の現行Ambessa基本構成を補完表示。
+      // 対面指定のkeystone（Grasp/Electrocute等）はそのまま残し、基本のサブ枠を併記する。
+      const base = ['打ちこわし','息継ぎ','忍耐','突然のインパクト'];
+      const r = String(rawRune || '').trim();
+      if (!r) return `アンベッサ基本 / 征服者 / ${base.join(' / ')}`;
+      const key = r.split(/\s*\/\s*/)[0].trim();
+      if (['征服者','エレクトロキュート','グラスプ・オブ・ザ・アンダイイング','不死者の握撃'].includes(key)) {
+        return `アンベッサ基本 / ${key} / ${base.join(' / ')}`;
+      }
+      return r;
+    }
+
+    function getAmbessaSpellDisplay(enemyName, rawSpell) {
+      const r = String(rawSpell || '').trim();
+      // 現行WR 7.2dのAmbessa基本はFlash + Ignite。研究メモでTPを明記した
+      // Renekton/Gwen等はその対面指定を優先する。
+      if (['アニビア'].includes(enemyName)) return r || 'フラッシュ＋テレポート';
+      if (['レネクトン','グウェン','ポッピー'].includes(enemyName)) return 'フラッシュ＋テレポート';
+      if (r === 'フラッシュ＋テレポート' || !r) return 'フラッシュ＋イグナイト';
+      return r;
+    }
+
     function getStrictMatchupResearchDetail(champName, enemyName, disposition, customTips) {
       if (champName === 'アンベッサ' && ambessaMatchupDetails[enemyName]) {
         const d = ambessaMatchupDetails[enemyName];
         return {
           recommendation: d.recommendation,
-          rune: d.rune,
-          spell: d.spell,
+          rune: getAmbessaRuneDisplay(enemyName, d.rune),
+          spell: getAmbessaSpellDisplay(enemyName, d.spell),
           difficulty: d.difficulty,
           enemyWin: d.enemyWin,
           trade: d.trade,
@@ -4094,17 +4117,16 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       const mySelect = document.getElementById('myChampSelect');
       const enemySelect = document.getElementById('enemyChampSelect');
       const championList = document.getElementById('championList');
-      
-      // 入力候補をdatalistへ登録
+
+      // 現行UIは独自のコンボボックスを使用する。旧UI用datalistが存在しない場合は
+      // ここで何もしない。以前の初期化処理がnullへアクセスして新UIの検索処理まで
+      // 止めていたため、候補欄が表示されない原因になっていた。
+      if (!mySelect || !enemySelect) return;
+      if (!championList) return;
+
       championList.innerHTML = matchups
         .map(c => `<option value="${c.name}">${c.kana}</option>`)
         .join('');
-
-      // 初期値設定 (自分: モルデカイザー, 対面: アーゴット)
-      if(matchups.length > 0) {
-        mySelect.value = "モルデカイザー";
-        enemySelect.value = "アーゴット";
-      }
     }
 
     function switchMode(mode) {
@@ -4706,6 +4728,22 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
       container.innerHTML=''; container.appendChild(card);
     };
 
-    // 初期化
-    initSelects();
-    renderCardsA(matchups);
+    // 旧UIは現在のindex.htmlでは使用しない。旧DOMが存在する場合のみ初期化する。
+    if (document.getElementById('championList') || document.getElementById('tabModeA')) {
+      initSelects();
+      if (document.getElementById('champContainer')) renderCardsA(matchups);
+    }
+
+    // 現行index.htmlから参照するための公開API。トップレベルconstはwindowへ自動公開されないため、
+    // UI側から直接参照できるよう明示的に公開する。
+    window.WR_TOP_DB = {
+      matchups,
+      researchOnlyMatchups: typeof researchOnlyMatchups !== 'undefined' ? researchOnlyMatchups : [],
+      matchupSourceAudit,
+      championSkillMatchups,
+      championSkillTips,
+      researchedMyChampions,
+      matchupResearch,
+      ambessaMatchupDetails,
+      currentWrGlobalStats
+    };
