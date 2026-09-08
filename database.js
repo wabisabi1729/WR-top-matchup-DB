@@ -2352,6 +2352,16 @@ const renektonTips = {
     }
 
     function getMatchupRuneSet(champName, enemyName, disposition) {
+      // アンベッサは対面別監査データを最優先。汎用ルーン推測で上書きしない。
+      if (champName === 'アンベッサ' && ambessaMatchupDetails[enemyName]) {
+        const d = ambessaMatchupDetails[enemyName];
+        return {
+          runeText: String(d.rune || '').trim() || '資料未指定',
+          reason: d.reason || '対面別監査データを優先。',
+          structure: '対面別監査データ'
+        };
+      }
+
       if (champName === 'グウェン') {
         const rangedPoke = new Set(['ヴァルス','ヴェイン','クイン','ケネン','ティーモ','ジェイス','ナー','ガングプランク','カシオペア','ハイマーディンガー','ライズ','ブラッドミア','ケイル','トリスターナ','オーロラ']);
         const hardCC = new Set(['ダリウス','レネクトン','ジャックス','リヴェン','イレリア','パンテオン','セト','ポッピー','ガレン','トリンダメア','ウディア','ボリベア']);
@@ -3924,10 +3934,32 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     const ambessaTips = Object.fromEntries(Object.entries(ambessaMatchupDetails).map(([enemy, d]) => [enemy, `【相性: ${ambessaDispositionLabel[d.disposition] || "要追加検証"}】${d.trade} ${d.difficulty}`]));
 
     function getAmbessaRuneDisplay(enemyName, rawRune) {
-      // アンベッサのルーンは対面ごとの研究データをそのまま表示する。
-      // 以前の「アンベッサ基本」で全対面を征服者に補完する処理は、対面別資料を潰してしまうため廃止。
+      // 監査データにはキーストーンだけが保存されている対面があるため、
+      // 旧DBで採用していた「メイン3枠＋サブ1枠」の表示形式へ補完する。
+      // キーストーン自体は監査データをそのまま優先し、補完部分は既存の対面分類ルールに合わせる。
       const r = String(rawRune || '').trim();
-      return r || '資料未指定';
+      if (!r || r === '資料未指定') return '資料未指定';
+      if (/\//.test(r)) return r;
+
+      const ranged = typeof rangedEnemies !== 'undefined' && rangedEnemies.has(enemyName);
+      const burst = typeof burstEnemies !== 'undefined' && burstEnemies.has(enemyName);
+      const cc = typeof ccEnemies !== 'undefined' && ccEnemies.has(enemyName);
+
+      if (r === '不死者の握撃' || r === 'グラスプ・オブ・ザ・アンダイイング') {
+        const r2 = ranged ? '息継ぎ' : 'ボーンアーマー';
+        const r3 = cc ? '忍耐' : '超成長';
+        return `${r} / 打ちこわし / ${r2} / ${r3} / ブルータル`;
+      }
+      if (r === '征服者') {
+        const p3 = cc ? 'レジェンド：強靭' : 'レジェンド：迅速';
+        const sub = ranged ? '息継ぎ' : (burst ? 'ボーンアーマー' : '超成長');
+        return `${r} / ブルータル / 背水の陣 / ${p3} / ${sub}`;
+      }
+      if (r === 'エレクトロキュート') {
+        const sub = ranged ? '息継ぎ' : 'ボーンアーマー';
+        return `${r} / サドンインパクト / ブルータル / 背水の陣 / ${sub}`;
+      }
+      return r;
     }
 
     function getAmbessaSpellDisplay(enemyName, rawSpell) {
