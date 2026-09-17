@@ -2723,7 +2723,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "ポッピー": {
-    "disposition": "even",
+    "disposition": "extreme",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "不死者の握撃",
     "spell": "フラッシュ＋テレポート",
@@ -2739,6 +2739,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Poppy Wが見えている状態でPassiveダッシュを連続使用し、最後の逃げ用ダッシュまで失う。壁際で無計画にEやRを使ってPoppyのE/Rの位置取りを許す。",
     "source": "主資料：MOBAFire［26.17］Rank 1 Poppy Top Guide（Poppy側のAmbessa評価はEven）。補助：Onetricks.gg現行Ambessa counterでPoppy 101試合・Poppy 51.5%・Ambessa側GD@15 -401、Onetricks Poppy vs Ambessa集計186試合。WR固有仕様はWildRiftFire Patch 7.2dでPoppy WのCD/ダッシュ阻止/Grounded/Slowを確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "アーゴット": {
     "disposition": "even",
@@ -2757,6 +2759,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "アーゴットEが残っている状態でEを先に吐き、E→Wの長期追撃を正面から受け続ける。特にR処刑圏では逃げ用のPassive/Eを残さず全リソースを使い切らない。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面データ。WR固有仕様は現行Wild Rift資料で確認。対面評価はレーン機構を優先し、最終判定は五分。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even～Skill"
   },
   "イラオイ": {
     "disposition": "disadvantage",
@@ -2780,7 +2784,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "disposition": "extreme",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "征服者",
-    "spell": "フラッシュ＋テレポート",
+    "spell": "イグナイト＋テレポート",
     "difficulty": "Lv1〜4とスタック完成後が危険。",
     "enemyWin": "4スタック＋Q連続接近から長期戦。",
     "trade": "QでCSを削り、IreliaのEを避けた後だけ短く返す。",
@@ -2793,6 +2797,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "4スタック中に正面で長く殴らない。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "Hard"
   },
   "ヴァルス": {
     "disposition": "disadvantage",
@@ -2829,6 +2835,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Eを先に使ってVayneに自由なCondemnを与えない。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "やや不利～Hard"
+  ,
+    "spellAggressive": "フラッシュ＋イグナイト"
+  ,
+    "spellAggressiveLabel": "条件型"
   },
   "ウーコン": {
     "disposition": "even",
@@ -2919,9 +2931,13 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Ornn W中に全リソースを先出しする。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Favorable～Minor"
+  ,
+    "secondCoreNote": "2手目はショウジンの矛を基本。ブラック クリーバーは防具を積む相手への条件候補。征服者は維持。"
   },
   "オラフ": {
-    "disposition": "even",
+    "disposition": "extreme",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "征服者",
     "spell": "フラッシュ＋テレポート",
@@ -2937,6 +2953,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Olaf R中に長期戦を始める。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "カ・サンテ": {
     "disposition": "advantage",
@@ -2993,7 +3011,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "カミール": {
-    "disposition": "disadvantage",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "征服者",
     "spell": "フラッシュ＋テレポート",
@@ -3009,6 +3027,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Camille R中に正面で長く殴る。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even～やや不利"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
   },
   "カシオペア": {
     "disposition": "disadvantage",
@@ -3029,10 +3051,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "クレッド": {
-    "disposition": "disadvantage",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "不死者の握撃",
-    "spell": "フラッシュ＋イグナイト＋テレポート",
+    "spell": "フラッシュ＋イグナイト",
     "difficulty": "Lv1〜5はKledのW込みの短時間バーストが強い。Lv5以降もDismount状態を無視した追撃に注意。2コア以降はEvenへ近づく。",
     "enemyWin": "E接近からQで拘束し、Wの4連打で短時間に削る。Rでサイド/集団戦の人数差を作る。",
     "trade": "Kled Wの4打を受け切らず、Qが外れた窓で短く交換。Dismount後は無理に追わず再騎乗条件を管理。",
@@ -3045,9 +3067,13 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Kled Wの4打を正面で全て受けない。Dismount後の追撃に全ダッシュを使い切らない。",
     "source": "主資料：Mobalytics複数パッチTop、CounterStats。補助：MOBAFire高レート対面資料。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
+  ,
+    "spellTypeLabel": "例外型"
   },
   "グウェン": {
-    "disposition": "disadvantage",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "征服者",
     "spell": "フラッシュ＋テレポート",
@@ -3063,6 +3089,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Gwen Q centerを受けて長期戦。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "Skill～やや有利"
+  ,
+    "secondCoreNote": "2手目はショウジンの矛を基本。Maw of MalmortiusはAP構成に対する条件候補。"
   },
   "クイン": {
     "disposition": "disadvantage",
@@ -3101,7 +3131,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "ケイル": {
-    "disposition": "advantage",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "エレクトロキュート",
     "spell": "フラッシュ＋テレポート",
@@ -3117,6 +3147,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Kayle R中に全リソースを吐く。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや有利寄り"
   },
   "ケネン": {
     "disposition": "extreme",
@@ -3261,6 +3293,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Jax E中に正面から長く殴らない。Eの再使用タイミングを無視して追撃しない。",
     "source": "主資料：MOBAFire高レートAmbessa/Jax対面考察。補助：Mobalytics Top、Onetricks.gg。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
   },
   "シンジド": {
     "disposition": "disadvantage",
@@ -3353,7 +3387,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "ダリウス": {
-    "disposition": "even",
+    "disposition": "extreme",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "グラスプ・オブ・ザ・アンダイイング",
     "spell": "フラッシュ＋テレポート",
@@ -3369,6 +3403,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "5stackを完成させるまで殴り続ける。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
   },
   "チョーガス": {
     "disposition": "disadvantage",
@@ -3389,7 +3427,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "ティーモ": {
-    "disposition": "extreme",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "エレクトロキュート",
     "spell": "フラッシュ＋テレポート",
@@ -3405,6 +3443,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Blind中に長くAAする。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "Skill～やや不利"
+  ,
+    "secondCoreNote": "Maw of MalmortiusはAP条件の候補。Hard固定にはせず、対面のAP構成に応じて判断。"
   },
   "ドクター・ムンド": {
     "disposition": "advantage",
@@ -3425,7 +3467,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "トランドル": {
-    "disposition": "disadvantage",
+    "disposition": "extreme",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "グラスプ・オブ・ザ・アンダイイング",
     "spell": "フラッシュ＋テレポート",
@@ -3441,6 +3483,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Eを先に使ってPillarで閉じ込められる。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "トリスターナ": {
     "disposition": "disadvantage",
@@ -3513,6 +3557,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Mega状態へ正面all-in。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★☆☆"
+  ,
+    "evaluation": "Skill"
   },
   "ナサス": {
     "disposition": "advantage",
@@ -3531,6 +3577,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Nasus R中に長く殴り合う。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Favorable"
   },
   "ナフィーリ": {
     "disposition": "even",
@@ -3603,9 +3651,13 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Pantheon W直後に全リソースを使う。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
   },
   "フィオラ": {
-    "disposition": "advantage",
+    "disposition": "even",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "不死者の握撃",
     "spell": "フラッシュ＋テレポート",
@@ -3621,6 +3673,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Fiora Wを確認せず主要CCを重ねない。2コア以降のサイドでFioraと同条件の長期1v1を繰り返さない。",
     "source": "主資料：MOBAFire高レートFiora/Ambessa対面資料。補助：Mobalytics Top、Onetricks.gg。LaneとScalingを分離。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや有利"
+  ,
+    "spellAggressive": "イグナイト"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "ブラッドミア": {
     "disposition": "disadvantage",
@@ -3747,6 +3805,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Yone E/Rに合わせず正面で長期戦。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや不利"
   },
   "ヨリック": {
     "disposition": "disadvantage",
@@ -3821,10 +3881,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "リヴェン": {
-    "disposition": "advantage",
+    "disposition": "disadvantage",
     "recommendation": "赤月の刃 → ショウジンの矛",
     "rune": "征服者",
-    "spell": "フラッシュ＋イグナイト＋テレポート",
+    "spell": "フラッシュ＋テレポート",
     "difficulty": "Lv1〜3のshort trade window。",
     "enemyWin": "Q3/W stun→R burst。",
     "trade": "RivenのQ3/Wをbait、Wをstun前に置いて短く返す。",
@@ -3837,6 +3897,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Riven cooldowns中に長追い。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "やや不利"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
   },
   "ルブラン": {
     "disposition": "disadvantage",
@@ -3873,6 +3937,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "Fury Wを残したRenektonへW先出し。",
     "source": "主資料：MOBAFire CurSteelのAmbessa Top guide。補助：Onetricks.gg Masters+対面/ビルド。WR固有仕様は現行WR資料で確認。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "Hard"
+  ,
+    "secondCoreNote": "2手目はショウジンの矛を基本。ブラック クリーバーは防具を積む構成・継続戦闘が必要な場合の条件候補。"
   },
   "レンガー": {
     "disposition": "even",
@@ -3909,6 +3977,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "neverDo": "低HPでWarwickを誘って長く走り合わない。Eが残るWarwickへ全スキルを使い切らない。W2回目の回復を許した後に追撃を続けない。",
     "source": "主資料：MOBAFire Ambessa/Warwick対面考察。補助：Mobalytics、LoLMatchups Master+、Onetricks.gg。長期戦回避を最優先。",
     "confidence": "★★★★★"
+  ,
+    "evaluation": "Hard"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "secondCoreNote": "2手目はショウジンの矛を基本。ブラック クリーバーは条件候補。重傷系アイテムはWR現行仕様と購入タイミングを別途確認するまで確定しない。"
   },
   "アカリ": {
     "disposition": "even",
@@ -4062,17 +4136,21 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "高",
     "matchupReason": "Lv2からRenektonの主導権が強く、Fury Wを含む短時間交換を受けやすい。AmbessaのDashだけでは追撃を完全に拒否しにくい。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
-    "secondCore": "ブラッククリーバー",
+    "secondCore": "ショウジンの矛",
     "trade": "Lv2からRenektonの主導権が強く、Fury Wを含む短時間交換を受けやすい。",
     "neverDo": "Fury最大時の正面戦 / Fury 50以上で長期戦 / Fury最大時の再接触",
     "standardSkillOrder": "Q → E → W（変更なし）",
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
+  ,
+    "secondCoreNote": "ブラック クリーバーは防具を積む構成・継続戦闘が必要な場合の条件候補。"
   },
   "ポッピー": {
     "auditDispositionText": "Hard",
@@ -4080,7 +4158,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "高",
     "matchupReason": "WがAmbessaのDashを直接制限し、壁際ではE/RのCCが連続する。短い交換の出口を失いやすい。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4091,6 +4169,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "イレリア": {
     "auditDispositionText": "Hard",
@@ -4098,7 +4178,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "高",
     "matchupReason": "Lv2-3のQ連鎖と長時間DPSが強く、Minionを利用した再接近でAmbessaの離脱を追える。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "イグナイト＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4109,6 +4189,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "ダリウス": {
     "auditDispositionText": "Hard",
@@ -4116,7 +4198,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "高",
     "matchupReason": "Q外周とE PullでDash後の位置を制御され、Extended tradeがDarius側。Passive 5スタック完成前の離脱が重要。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4127,6 +4209,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "オラフ": {
     "auditDispositionText": "Hard",
@@ -4134,7 +4222,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "高",
     "matchupReason": "Q/EとAAによる長時間戦闘が強く、R中はCCで止めにくい。Ambessaの短い交換が長期戦へ変わりやすい。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4145,6 +4233,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "マルファイト": {
     "auditDispositionText": "Skill～やや不利",
@@ -4201,8 +4291,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "トランドル": {
-    "auditDispositionText": "Favorable",
-    "disposition": "advantage",
+    "auditDispositionText": "Hard",
+    "disposition": "extreme",
     "confidenceAudit": "有力",
     "matchupReason": "現行PCデータではAmbessa側が優勢。Pillarを離脱用に管理し、短い交換から継続戦闘へ。旧『やや不利』判定は撤回。",
     "rune": "征服者 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
@@ -4217,6 +4307,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
   },
   "セト": {
     "auditDispositionText": "Skill～やや有利",
@@ -4273,22 +4365,26 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "オーン": {
-    "auditDispositionText": "Favorable",
+    "auditDispositionText": "Favorable～Minor",
     "disposition": "advantage",
     "confidenceAudit": "有力",
     "matchupReason": "CCセットをDashで崩しやすい。Armor/HP完成前に差を作り、厚くなればBCへ。",
     "rune": "征服者 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
-    "secondCore": "ブラッククリーバー",
+    "secondCore": "ショウジンの矛",
     "trade": "CCセットをDashで崩しやすい。",
     "neverDo": "Q地形＋W / W最終Hit / 壁際",
     "standardSkillOrder": "Q → E → W（変更なし）",
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Favorable～Minor"
+  ,
+    "secondCoreNote": "ブラック クリーバーは防具を積む相手への条件候補。基本Secondはショウジンの矛。征服者は維持。"
   },
   "チョ＝ガス": {
     "auditDispositionText": "Skill",
@@ -4309,12 +4405,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "グウェン": {
-    "auditDispositionText": "やや有利～Skill",
-    "disposition": "advantage",
+    "auditDispositionText": "Skill～やや有利",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "序盤はAmbessaが圧力を作りやすいが、Gwenは2コア以降のSide長期戦とR継続ダメージ・回復が強い。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "マーキュリーブーツ",
@@ -4325,6 +4421,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "マルモティウスの胃袋は敵APが高い場合の条件候補。基本Secondはショウジンの矛。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや有利"
+  ,
+    "secondCoreNote": "マルモティウスの胃袋は敵APが高い場合の条件候補。基本Secondはショウジンの矛。"
   },
   "エイトロックス": {
     "auditDispositionText": "Skill～やや有利",
@@ -4379,14 +4479,20 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "やや不利"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "フィオラ": {
     "auditDispositionText": "Skill～やや有利",
-    "disposition": "advantage",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "複数DashでVital管理を崩しやすい。Fiora Wで本命を受けられると逆転する。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4397,10 +4503,16 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや有利"
+  ,
+    "spellAggressive": "イグナイト"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "カミール": {
     "auditDispositionText": "Even～やや不利",
-    "disposition": "disadvantage",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "E接近とQ2の高火力がAmbessaの短時間交換をPunish。WはQ2/E対応へ温存。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
@@ -4415,6 +4527,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even～やや不利"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "ナー": {
     "auditDispositionText": "Skill",
@@ -4422,7 +4540,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "有力",
     "matchupReason": "MiniのAA/HopとRage/Mega管理が戦闘条件を決める。現行PC統計ではAmbessa側に改善があるが、時間帯差が大きい。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ロングソード",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4433,6 +4551,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill"
   },
   "ジェイス": {
     "auditDispositionText": "Skill～やや有利",
@@ -4458,7 +4578,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "有力",
     "matchupReason": "Lv2が強い。E中の追撃に付き合わず、E帰還後に短い交換。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ロングソード",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4469,6 +4589,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや不利"
   },
   "ヤスオ": {
     "auditDispositionText": "Skill～やや不利",
@@ -4489,12 +4611,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "パンテオン": {
-    "auditDispositionText": "やや不利",
-    "disposition": "disadvantage",
+    "auditDispositionText": "Even",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "Lv2が強くW/Qで短時間Burst。R着地を追わずWave/Plateへ変換する。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4505,14 +4627,20 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "spellAggressiveLabel": "攻撃型"
   },
   "アーゴット": {
-    "auditDispositionText": "やや不利",
-    "disposition": "disadvantage",
+    "auditDispositionText": "Even～Skill",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "EをAmbessa Wで受けることが重要。Eを外した瞬間が短いAll-in窓。中盤以降の継続DPSが強い。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4523,10 +4651,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even～Skill"
   },
   "クレッド": {
-    "auditDispositionText": "やや不利",
-    "disposition": "disadvantage",
+    "auditDispositionText": "Even",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "Q+Eで離脱を止められ、W中DPSも高い。Dismount後はSkaarl再騎乗ゲージを確認してからAll-in。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
@@ -4541,6 +4671,10 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
+  ,
+    "spellTypeLabel": "例外型"
   },
   "シンジド": {
     "auditDispositionText": "やや不利",
@@ -4561,12 +4695,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★☆☆"
   },
   "ヴェイン": {
-    "auditDispositionText": "Skill～やや不利",
+    "auditDispositionText": "やや不利～Hard",
     "disposition": "disadvantage",
     "confidenceAudit": "暫定",
     "matchupReason": "Condemn/Tumble/Final Hourで接近拒否。1コア直後はAmbessaの勝負窓だが、2コア以降Scalingが強い。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ロングソード",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4577,24 +4711,34 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★☆☆"
+  ,
+    "evaluation": "やや不利～Hard"
+  ,
+    "spellAggressive": "フラッシュ＋イグナイト"
+  ,
+    "spellAggressiveLabel": "条件型"
   },
   "ティーモ": {
-    "auditDispositionText": "Hard寄り",
-    "disposition": "extreme",
+    "auditDispositionText": "Skill～やや不利",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "BlindがAA挿入を直接阻害し、AP DoTとShroomで接近後の継続戦闘を悪化させる。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ロングソード",
     "firstCompleted": "赤月の刃",
     "boots": "マーキュリーブーツ",
-    "secondCore": "マルモティウスの胃袋",
+    "secondCore": "ショウジンの矛",
     "trade": "BlindがAA挿入を直接阻害し、AP DoTとShroomで接近後の継続戦闘を悪化させる。",
     "neverDo": "Blind中AA / 毒上長期 / Blind中All-in",
     "standardSkillOrder": "Q → E → W（変更なし）",
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや不利"
+  ,
+    "secondCoreNote": "マルモティウスの胃袋は敵APが高い場合の条件候補。基本Secondはショウジンの矛。"
   },
   "ヨリック": {
     "auditDispositionText": "やや不利",
@@ -4674,7 +4818,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "有力",
     "matchupReason": "Qの回復、Wの低HP追撃、Eのダメージ軽減/恐怖、Rの拘束で、AmbessaがHPを削ってから追撃する流れがWarwick側の勝ち筋に反転しやすい。短期交換→離脱を徹底する。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4685,6 +4829,14 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "PC資料では回復対策として早期の重傷系アイテムが候補になるが、WR 7.2eでの最適な対策アイテム・タイミングは未確定。ブラック クリーバーは敵Armorが高い/前衛が複数の場合の条件候補。基本Secondはショウジンの矛。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Hard"
+  ,
+    "spellAggressive": "イグナイト＋テレポート"
+  ,
+    "spellAggressiveLabel": "条件型"
+  ,
+    "secondCoreNote": "ブラック クリーバーは敵Armorが高い／前衛が複数の場合の条件候補。重傷系アイテムはWR現行仕様と購入タイミングを確認するまで確定しない。"
   },
   "タム・ケンチ": {
     "auditDispositionText": "Skill",
@@ -4831,12 +4983,12 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidence": "★★★★☆"
   },
   "ジャックス": {
-    "auditDispositionText": "やや不利",
-    "disposition": "disadvantage",
+    "auditDispositionText": "Even",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "EによるAA無効とQ追撃、2コア以降のSideがAmbessaの交換構造と噛み合いにくい。",
     "rune": "握撃 / 打ちこわし / ボーンアーマー / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4847,14 +4999,16 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Even"
   },
   "ケイル": {
-    "auditDispositionText": "やや不利",
-    "disposition": "disadvantage",
+    "auditDispositionText": "Skill～やや有利寄り",
+    "disposition": "even",
     "confidenceAudit": "有力",
     "matchupReason": "序盤はAmbessaが圧力を作りやすいが、Kayleの安全なScalingとRが時間経過で価値を持つ。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ロングソード",
     "firstCompleted": "赤月の刃",
     "boots": "マーキュリーブーツ",
@@ -4865,6 +5019,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "セリルダの怨恨は遠距離・kite対策が必要な場合の条件候補。基本Secondはショウジンの矛。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Skill～やや有利寄り"
   },
   "ナサス": {
     "auditDispositionText": "Favorable",
@@ -4872,7 +5028,7 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "confidenceAudit": "有力",
     "matchupReason": "現行データでLv2前後のLane指標がAmbessa側に大きく寄る。Q Farmを妨害し、序盤差をObjectiveへ変換する。",
     "rune": "握撃 / 打ちこわし / 息継ぎ / 超成長 ｜ サドンインパクト",
-    "spell": "フラッシュ＋イグナイト",
+    "spell": "フラッシュ＋テレポート",
     "firstComponent": "ルビークリスタル",
     "firstCompleted": "赤月の刃",
     "boots": "プレートスチールキャップ",
@@ -4883,6 +5039,8 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     "unresolved": "保留・暫定根拠は上記confidenceとmatchupReasonを維持。",
     "source": "既存の高品質PC対面資料 / 現行PC統計 / 現行WR仕様確認資料（対面ごとの詳細出典は旧資料を保持）",
     "confidence": "★★★★☆"
+  ,
+    "evaluation": "Favorable"
   },
   "サイラス": {
     "auditDispositionText": "やや不利",
@@ -5118,6 +5276,11 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
           phases: d.phases,
           standardSkillOrder: d.standardSkillOrder,
           unresolved: d.unresolved,
+          evaluation: d.evaluation,
+          spellAggressive: d.spellAggressive,
+          spellAggressiveLabel: d.spellAggressiveLabel,
+          spellTypeLabel: d.spellTypeLabel,
+          secondCoreNote: d.secondCoreNote,
           source: d.sources || d.source
         };
       }
