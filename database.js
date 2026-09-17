@@ -4027,14 +4027,31 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
     };
 
     function ambessaPhaseFallback(d) {
-      const empty = {goal:'監査資料未指定', action:'監査資料未指定', avoid:'監査資料未指定'};
+      // 監査で明示された phases は最優先。
+      // 未記載の時間帯だけ、既存DBの difficulty / trade / neverDo を
+      // 構造化して表示する。新しい攻略内容はここでは推測しない。
+      const text = String(d.difficulty || '');
+      const sentences = text.split(/(?<=[。！？])/).map(s => s.trim()).filter(Boolean);
+      const findPhase = (patterns) => sentences.find(s => patterns.some(re => re.test(s))) || '';
+      const trade = String(d.trade || '').trim();
+      const avoid = String(d.neverDo || '').trim();
+      const make = (explicit, patterns) => {
+        if (explicit) return explicit;
+        const existing = findPhase(patterns);
+        return {
+          goal: existing || '既存DBに時間帯別の個別目標は未記載',
+          action: trade || '既存DBに個別行動は未記載',
+          avoid: avoid || '既存DBに禁止事項は未記載'
+        };
+      };
+      const phases = d.phases || {};
       return {
-        lv1: d.phases?.lv1 || empty,
-        lv2: d.phases?.lv2 || empty,
-        lv3_4: d.phases?.lv3_4 || empty,
-        lv5: d.phases?.lv5 || empty,
-        oneCore: d.phases?.oneCore || empty,
-        twoCorePlus: d.phases?.twoCorePlus || empty
+        lv1: make(phases.lv1, [/Lv1[〜～\-]?2/, /Lv1\b/]),
+        lv2: make(phases.lv2, [/Lv1[〜～\-]?2/, /Lv2\b/]),
+        lv3_4: make(phases.lv3_4, [/Lv3[〜～\-]?5/, /Lv3[〜～\-]?4/, /Lv3\b/]),
+        lv5: make(phases.lv5, [/Lv5以降/, /Lv5[〜～\-]?6/, /Lv5\b/]),
+        oneCore: make(phases.oneCore, [/1コア後/, /1コア/]),
+        twoCorePlus: make(phases.twoCorePlus, [/2コア以降/, /2コア/])
       };
     }
 
