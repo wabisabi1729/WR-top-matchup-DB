@@ -3930,6 +3930,131 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
   }
 };
 
+    /*
+     * Ambessa 7.2e 監査版の統一スキーマ。
+     * 既存の詳細値を捨てず、監査で確認された項目だけを上書きする。
+     * 個別フェーズが監査資料にない場合は推測せず「監査資料未指定」とする。
+     */
+    const ambessaAuditOverrides = {
+      "レネクトン": {
+        disposition: "extreme", confidence: "★★★★★",
+        matchupReason: "Lv2からRenektonの主導権が強く、Fury Wを含む短時間交換を受けやすい。AmbessaのDashだけでは追撃を完全に拒否しにくい。",
+        rune: "不死者の握撃 / 打ちこわし / ボーンアーマー / オーバーグロース / サドンインパクト",
+        spell: "フラッシュ＋イグナイト", firstComponent: "ルビークリスタル", firstCompleted: "赤月の刃", boots: "プレートスチールキャップ", secondCore: "ブラッククリーバー",
+        phases: {
+          lv1:{goal:"Fury管理",action:"QでCSを取り、Furyを確認して短く交換",avoid:"Fury最大時の正面戦"},
+          lv2:{goal:"E/W交換を受けない",action:"WをRenekton Wに合わせ、AAを挟んで離脱",avoid:"Fury 50以上で長期戦"},
+          lv3_4:{goal:"CD差でFarm",action:"W/E後に短く返す",avoid:"Fury最大時の再接触"},
+          lv5:{goal:"R前にHP維持",action:"短期交換を継続",avoid:"低HPで無理に追撃"},
+          oneCore:{goal:"死なずに圧力",action:"赤月の刃後に短い交換",avoid:"Renekton R中のAll-in"},
+          twoCorePlus:{goal:"集団戦へ",action:"側面Dive",avoid:"正面1v1"}
+        }
+      },
+      "グウェン": {
+        disposition: "advantage", confidence: "★★★★☆",
+        matchupReason: "序盤はAmbessaが圧力を作りやすいが、Gwenは2コア以降のSide長期戦とR継続ダメージ・回復が強い。",
+        rune: "不死者の握撃 / 打ちこわし / 息継ぎ / オーバーグロース / サドンインパクト",
+        spell: "フラッシュ＋イグナイト", firstComponent: "ルビークリスタル", firstCompleted: "赤月の刃", boots: "マーキュリーブーツ", secondCore: "ショウジンの矛",
+        secondCoreNote: "マルモティウスの胃袋は敵APが高い場合の条件候補。基本Secondはショウジンの矛。",
+        phases: {
+          lv1:{goal:"Qスタックを作らせない",action:"Q外側→Passive→離脱",avoid:"Q中心"},
+          lv2:{goal:"E強化AAを受け続けない",action:"E発動後に離れる",avoid:"E強化AA長期"},
+          lv3_4:{goal:"W境界を利用",action:"短く触って離脱",avoid:"W内で追う"},
+          lv5:{goal:"Lv6前にHP差",action:"Q/E短期交換",avoid:"最大Qスタック"},
+          oneCore:{goal:"Lane優位をGoldへ",action:"Wave→Objective→Side",avoid:"延々1v1"},
+          twoCorePlus:{goal:"長期Sideを避ける",action:"集団戦で後衛へ",avoid:"同Gold長期1v1"}
+        }
+      },
+      "ナー": {
+        disposition: "skill", confidence: "★★★★☆",
+        matchupReason: "遠距離AAとMiniの機動力、Rage/Mega管理で戦闘条件が変わる。監査では単純な有利不利ではなくSkill依存として整理。",
+        rune: "不死者の握撃 / 打ちこわし / 息継ぎ / オーバーグロース / サドンインパクト",
+        spell: "フラッシュ＋テレポート", firstComponent: "ロングソード", firstCompleted: "赤月の刃", boots: "プレートスチールキャップ", secondCore: "ショウジンの矛",
+        secondCoreNote: "Seryldaの怨恨は遠距離・kite対策が必要な場合の条件候補。",
+      },
+      "グラガス": {
+        disposition: "skill", confidence: "★★★★☆",
+        matchupReason: "GragasのE/Rによる位置ずらしと接近拒否が交換条件を左右する。監査ではSkill依存として整理。",
+        rune: "不死者の握撃 / 打ちこわし / 息継ぎ / オーバーグロース / サドンインパクト",
+        spell: "フラッシュ＋テレポート", firstComponent: "ロングソード", firstCompleted: "赤月の刃", boots: "マーキュリーブーツ", secondCore: "ショウジンの矛"
+      },
+      "カミール": {
+        disposition: "even", confidence: "★★★★☆",
+        matchupReason: "CamilleのE接近とQ2の高火力が分岐点。AmbessaはWをQ2/E対応へ温存する。監査ではEven～やや不利として整理。",
+        rune: "不死者の握撃 / 打ちこわし / ボーンアーマー / オーバーグロース / サドンインパクト",
+        spell: "フラッシュ＋テレポート", firstComponent: "ルビークリスタル", firstCompleted: "赤月の刃", boots: "プレートスチールキャップ", secondCore: "ショウジンの矛",
+        phases: {
+          lv1:{goal:"Q2を受けない",action:"Q外側→離脱",avoid:"Q2正面"},
+          lv2:{goal:"E接近を拒否",action:"E後に短く返す",avoid:"E→Q2"},
+          lv3_4:{goal:"Wを温存",action:"Q2/EにWを合わせる",avoid:"W CDを同時消費"},
+          lv5:{goal:"R前にHP差",action:"短期交換",avoid:"低HPでR"},
+          oneCore:{goal:"赤月の刃で圧力",action:"Q/E→離脱",avoid:"長期戦"},
+          twoCorePlus:{goal:"Sideで長期戦回避",action:"集団戦側面",avoid:"Camille正面1v1"}
+        }
+      },
+      "リヴェン": {
+        spell: "フラッシュ＋テレポート"
+      },
+      "ケイル": {
+        secondCore: "ショウジンの矛",
+        secondCoreNote: "セリルダの怨恨は遠距離・kite対策が必要な場合の条件候補。基本Secondはショウジンの矛。"
+      },
+      "マルファイト": {
+        confidence: "★★★☆☆",
+        disposition: "disadvantage",
+        matchupReason: "序盤は短い交換が可能だが、ArmorとR開始で中盤以降の戦闘条件が悪化する。WR 7.2eのBaron Lane向け強化があるため暫定評価を維持。",
+        spell: "フラッシュ＋テレポート",
+        firstComponent: "ルビークリスタル", firstCompleted: "赤月の刃", boots: "マーキュリーブーツ", secondCore: "ブラッククリーバー",
+        unresolved: "WR 7.2eでMalphiteのBaron Lane向け強化が入ったため、現行WRでの対面評価は追加確認が必要。既存のSkill～やや不利を暫定保持。"
+      },
+      "ワーウィック": {
+        secondCore: "ショウジンの矛",
+        secondCoreNote: "回復阻害の最適購入タイミングは未確定。ブラッククリーバーは敵Armorが高い／前衛が複数の場合の条件候補。",
+        phases: {
+          lv1:{goal:"Q+AAの長期交換を拒否",action:"Q外側→Passive→短く離脱",avoid:"Qを受けた後のAA継続"},
+          lv2:{goal:"低HP追撃条件を作らない",action:"短期接触→離脱",avoid:"HP50%前後での再接触"},
+          lv3_4:{goal:"W追撃を切る",action:"Q/E→W→Wave側へ離脱",avoid:"W追跡中の再接触"},
+          lv5:{goal:"R all-in条件を作らない",action:"HPを高く保ち短期交換。R使用/失敗後を狙う",avoid:"R圏内で低HP"},
+          oneCore:{goal:"回復・追撃前に戦闘を終える",action:"短期交換→離脱→再接触",avoid:"長期All-in"},
+          twoCorePlus:{goal:"Sideの長期1v1を避ける",action:"健康HPで短く触り、集団戦/側面へ変換",avoid:"低HPで正面Side 1v1"}
+        }
+      },
+      "スカーナー": { disposition:"unknown", confidence:"保留", matchupReason:"Top実戦データと高レート対面資料が不足。別レーンデータをTop評価の根拠に流用しない。", unresolved:"監査資料で保留。推測で実装しない。", rune:"未設定", spell:"未設定", firstComponent:"未設定", firstCompleted:"未設定", boots:"未設定", secondCore:"未設定" },
+      "ウディア": { disposition:"unknown", confidence:"保留", matchupReason:"現行Top直接サンプルが少なく、パッチ間で結果も揺れるため確定不可。", unresolved:"監査資料で保留。推測で実装しない。", rune:"未設定", spell:"未設定", firstComponent:"未設定", firstCompleted:"未設定", boots:"未設定", secondCore:"未設定" },
+      "ザック": { disposition:"unknown", confidence:"保留", matchupReason:"Top直接データが不足。JungleデータはTop対面評価の根拠にしない。", unresolved:"監査資料で保留。推測で実装しない。", rune:"未設定", spell:"未設定", firstComponent:"未設定", firstCompleted:"未設定", boots:"未設定", secondCore:"未設定" },
+      "ザーヘン": { disposition:"unknown", confidence:"保留", matchupReason:"現在のWR Top counter poolでは対象外として扱う。既存資料は履歴として保持するが現行DB対面候補には入れない。", unresolved:"現行DBには実装しない。", rune:"未設定", spell:"未設定", firstComponent:"未設定", firstCompleted:"未設定", boots:"未設定", secondCore:"未設定" },
+      "ヨリック": { disposition:"unknown", confidence:"保留", matchupReason:"現在のWRでは対象外。", unresolved:"現行DBには実装しない。", rune:"未設定", spell:"未設定", firstComponent:"未設定", firstCompleted:"未設定", boots:"未設定", secondCore:"未設定" }
+    };
+
+    function ambessaPhaseFallback(d) {
+      const empty = {goal:'監査資料未指定', action:'監査資料未指定', avoid:'監査資料未指定'};
+      return {
+        lv1: d.phases?.lv1 || empty,
+        lv2: d.phases?.lv2 || empty,
+        lv3_4: d.phases?.lv3_4 || empty,
+        lv5: d.phases?.lv5 || empty,
+        oneCore: d.phases?.oneCore || empty,
+        twoCorePlus: d.phases?.twoCorePlus || empty
+      };
+    }
+
+    Object.entries(ambessaAuditOverrides).forEach(([enemy, patch]) => {
+      if (!ambessaMatchupDetails[enemy]) ambessaMatchupDetails[enemy] = {};
+      const d = ambessaMatchupDetails[enemy];
+      Object.assign(d, patch);
+      if (patch.secondCoreNote) d.unresolved = d.unresolved ? `${d.unresolved} ${patch.secondCoreNote}` : patch.secondCoreNote;
+    });
+
+    Object.entries(ambessaMatchupDetails).forEach(([enemy, d]) => {
+      d.matchupReason = d.matchupReason || d.reason || '監査資料の個別相性理由を保持。';
+      d.runeReason = d.runeReason || '監査済みの対面別ルーン指定を優先。';
+      d.unresolved = d.unresolved || '監査資料の未確定事項を保持。未記載部分は推測しない。';
+      d.sources = d.sources || d.source || '監査済み資料。';
+      d.phases = ambessaPhaseFallback(d);
+      d.standardSkillOrder = d.standardSkillOrder || 'Q → E → W。RはLv5 / 9 / 13。';
+      d.schemaVersion = '7.2e-audit-unified-1';
+    });
+
     const ambessaDispositionLabel = { advantage: "有利", even: "五分", disadvantage: "不利", extreme: "極めて不利" };
     const ambessaTips = Object.fromEntries(Object.entries(ambessaMatchupDetails).map(([enemy, d]) => [enemy, `【相性: ${ambessaDispositionLabel[d.disposition] || "要追加検証"}】${d.trade} ${d.difficulty}`]));
 
@@ -3973,19 +4098,26 @@ function getChampionMetaTip(champName, enemyName, isUnfavorable) {
         const d = ambessaMatchupDetails[enemyName];
         return {
           recommendation: d.recommendation,
+          disposition: d.disposition,
+          confidence: d.confidence,
+          matchupReason: d.matchupReason,
           rune: getAmbessaRuneDisplay(enemyName, d.rune),
+          runeReason: d.runeReason,
           spell: getAmbessaSpellDisplay(enemyName, d.spell),
           difficulty: d.difficulty,
           enemyWin: d.enemyWin,
           trade: d.trade,
           firstComponent: d.firstComponent,
           firstCompleted: d.firstCompleted,
+          boots: d.boots,
           secondCore: d.secondCore,
           reason: d.reason,
           itemAnalysis: d.itemAnalysis,
           neverDo: d.neverDo,
-          source: d.source,
-          confidence: d.confidence
+          phases: d.phases,
+          standardSkillOrder: d.standardSkillOrder,
+          unresolved: d.unresolved,
+          source: d.sources || d.source
         };
       }
       if (champName === 'エイトロックス') {
