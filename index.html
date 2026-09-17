@@ -61,7 +61,42 @@ function list(v,selfOnly){const q=norm(v),pool=poolFor(selfOnly);return(q?pool.f
 function show(inputId,boxId,selfOnly){const i=document.getElementById(inputId),b=document.getElementById(boxId);const arr=list(i.value,selfOnly);b.innerHTML=(arr.length?arr.map(c=>`<div class="combo-item" data-name="${esc(c.name)}">${champIcon(c)}<span class="combo-name">${esc(c.name)}</span><span class="combo-kana">${esc(c.kana||'')}</span></div>`).join(''):'<div class="combo-item"><span class="combo-kana">該当なし</span></div>');b.classList.add('open');b.querySelectorAll('[data-name]').forEach(e=>e.addEventListener('mousedown',ev=>{ev.preventDefault();i.value=e.dataset.name;b.classList.remove('open');render();}));}
 window.clearComboInput=function(id,bid){const i=document.getElementById(id),b=document.getElementById(bid);i.value='';b.classList.remove('open');render();i.focus();};
 function profile(c){const cs=(c.unfavorable||'').split(/[、,]/).map(x=>x.trim()).filter(Boolean);return`<div class="card"><div class="champ-header"><div class="champ-icon-wrapper">${champIcon(c,'champ-icon')}</div><div class="header-text"><span class="champ-name">${esc(c.name)}</span><span class="vs-header-text">チャンピオン概要</span></div></div><div class="section-block"><div class="section-title feature">◆ ${esc(c.name)} の特徴</div><div class="tags-container">${(c.types||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div><div class="tips-content" style="margin-top:8px">${esc(c.tips)}</div></div><div class="section-block"><div class="section-title matchup">◆ 登録カウンター候補</div><div class="counter-grid">${cs.map(n=>{const x=findIn(n,false);return`<div class="counter-card" data-counter="${esc(n)}">${x?champIcon(x):''}<span>${esc(n)}</span></div>`}).join('')}</div></div></div>`;}
-function getDetail(an,bn){try{return typeof getStrictMatchupResearchDetail==='function'?getStrictMatchupResearchDetail(an,bn,typeof getMatchupDisposition==='function'?getMatchupDisposition(an,bn):'',typeof getSpecificResearch==='function'?getSpecificResearch(an,bn)||'':''):{};}catch(e){return{};}}
+function getDetail(an,bn){
+  try{
+    // database.js は別scriptスコープのため、その内部関数へ直接依存しない。
+    // 現行DBが公開しているAmbessa監査データを直接参照する。
+    if(an==='アンベッサ' && DB.ambessaMatchupDetails && DB.ambessaMatchupDetails[bn]){
+      const d=DB.ambessaMatchupDetails[bn]||{};
+      return {
+        recommendation:d.recommendation,
+        disposition:d.disposition,
+        confidence:d.confidence,
+        matchupReason:d.matchupReason||d.reason,
+        rune:d.rune,
+        runeReason:d.runeReason,
+        spell:d.spell,
+        difficulty:d.difficulty,
+        enemyWin:d.enemyWin,
+        trade:d.trade,
+        firstComponent:d.firstComponent,
+        firstCompleted:d.firstCompleted,
+        boots:d.boots,
+        secondCore:d.secondCore,
+        reason:d.reason,
+        itemAnalysis:d.itemAnalysis,
+        neverDo:d.neverDo,
+        phases:d.phases,
+        standardSkillOrder:d.standardSkillOrder,
+        unresolved:d.unresolved,
+        source:d.sources||d.source
+      };
+    }
+    if(typeof getStrictMatchupResearchDetail==='function'){
+      return getStrictMatchupResearchDetail(an,bn,typeof getMatchupDisposition==='function'?getMatchupDisposition(an,bn):'',typeof getSpecificResearch==='function'?getSpecificResearch(an,bn)||'':'')||{};
+    }
+  }catch(e){console.error('getDetail error',e);}
+  return {};
+}
 function matchup(a,b){
   const an=a.name,bn=b.name,det=getDetail(an,bn),tip=(typeof getSpecificResearch==='function'?getSpecificResearch(an,bn):'')||a.tips||'';
   const d=det.disposition||((typeof parseDisposition==='function')?parseDisposition(tip):'unknown');
